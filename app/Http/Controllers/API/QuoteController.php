@@ -19,8 +19,10 @@ class QuoteController extends Controller
     public function add(Request $request)
     {
         $quote = new Quote([
-            'name' => $request->name,
-            'author' => $request->author
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'address' => $request->address,
         ]);
         $quote->save();
 

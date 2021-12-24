@@ -20,7 +20,8 @@ class ProductController extends Controller
     {
         $product = new Product([
             'name' => $request->name,
-            'author' => $request->author
+            'description' => $request->description,
+            'price' => $request->price,
         ]);
         $product->save();
 

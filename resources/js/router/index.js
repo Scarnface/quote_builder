@@ -8,6 +8,9 @@ import Dashboard from '../pages/Dashboard';
 import Quotes from '../components/Quotes';
 import AddQuote from '../components/AddQuote';
 import EditQuote from '../components/EditQuote';
+import Products from '../components/Products';
+import AddProduct from '../components/AddProduct';
+import EditProduct from '../components/EditProduct';
 
 export const routes = [
     {
@@ -44,6 +47,21 @@ export const routes = [
         name: 'editquote',
         path: '/quotes/edit/:id',
         component: EditQuote
+    },
+    {
+        name: 'products',
+        path: '/products',
+        component: Products
+    },
+    {
+        name: 'addproduct',
+        path: '/products/add',
+        component: AddProduct
+    },
+    {
+        name: 'editproduct',
+        path: '/products/edit/:id',
+        component: EditProduct
     },
 ];
 
