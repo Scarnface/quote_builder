@@ -19,8 +19,9 @@ class ProductListController extends Controller
     public function add(Request $request)
     {
         $productList = new ProductList([
-            'name' => $request->name,
-            'author' => $request->author
+            'quote_id' => $request->quote_id,
+            'product_id' => $request->product_id,
+            'quantity' => 1,
         ]);
         $productList->save();
 
