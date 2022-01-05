@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 class ProductListController extends Controller
 {
     // all productLists
-    public function index()
+    public function index($id)
     {
-        $productLists = ProductList::all()->toArray();
-        return array_reverse($productLists);
+        $productList = ProductList::find($id);
+        return response()->json($productList);
     }
 
     // add productList

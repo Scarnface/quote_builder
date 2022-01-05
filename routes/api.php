@@ -27,7 +27,7 @@ Route::group(['prefix' => 'products', 'middleware' => 'auth:sanctum'], function 
 });
 
 Route::group(['prefix' => 'productLists', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/', [ProductListController::class, 'index']);
+    Route::get('/{id}', [ProductListController::class, 'index']);
     Route::post('add', [ProductListController::class, 'add']);
     Route::get('edit/{id}', [ProductListController::class, 'edit']);
     Route::post('update/{id}', [ProductListController::class, 'update']);
