@@ -15,7 +15,7 @@ class CreateProductListsTable extends Migration
     {
         Schema::create('product_lists', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_list_id');
+            $table->foreignId('quote_id');
             $table->foreignId('product_id');
             $table->unsignedSmallInteger('quantity');
             $table->timestamps();
