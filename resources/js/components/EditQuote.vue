@@ -62,14 +62,16 @@
 export default {
     data() {
         return {
-            quote: {}
+            quote: {},
+            productList: {}
         }
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/quotes/edit/${this.$route.params.id}`)
                 .then(response => {
-                    this.quote = response.data;
+                    this.quote = response.data.quote;
+                    this.productList = response.data.productList;
                 })
                 .catch(function (error) {
                     console.error(error);

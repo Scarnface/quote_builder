@@ -34,7 +34,7 @@ class QuoteController extends Controller
     public function edit($id)
     {
         $quote = Quote::find($id);
-        $productList = ProductList::find('quote_id',[$id]);
+        $productList = ProductList::where('quote_id',$id)->get();
         return response()->json(['quote' => $quote, 'productList' => $productList]);
     }
 
