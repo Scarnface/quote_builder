@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h4 class="text-center">Edit Quote</h4>
+        <h4 class="text-center">Edit Client Details</h4>
         <div class="row">
             <div class="col-md-6">
                 <form @submit.prevent="updateQuote">
@@ -20,10 +20,41 @@
                         <label>Address</label>
                         <input type="text" class="form-control" v-model="quote.address">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Quote</button>
+                    <button type="submit" class="btn btn-primary">Update Client Details</button>
                 </form>
             </div>
         </div>
+    </div>
+
+    <div>
+        <h4 class="text-center">Products Included In Quote</h4><br/>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="product in productList" :key="product.id">
+                <td>{{ product.quote_id }}<!--{{ product.name }}--></td>
+                <td>{{ product.product_id }}<!--{{ product.description }}--></td>
+                <td>{{ product.quantity }}</td>
+                <td><!--{{ product.price }}--></td>
+                <td>
+                    <div class="btn-group" role="group">
+<!--                        <button class="btn btn-secondary" @click="decreaseProduct(productList.id)">-</button>-->
+<!--                        <button class="btn btn-secondary" @click="increaseProduct(productList.id)">+</button>-->
+<!--                        <button class="btn btn-danger" @click="deleteProduct(productList.id)">Delete</button>-->
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 </template>
 

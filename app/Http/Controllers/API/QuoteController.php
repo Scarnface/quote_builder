@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\ProductList;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 
@@ -33,7 +34,8 @@ class QuoteController extends Controller
     public function edit($id)
     {
         $quote = Quote::find($id);
-        return response()->json($quote);
+        $productList = ProductList::find('quote_id',[$id]);
+        return response()->json(['quote' => $quote, 'productList' => $productList]);
     }
 
     // update quote
