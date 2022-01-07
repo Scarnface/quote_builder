@@ -10,4 +10,9 @@ class Product extends Model
     use HasFactory;
 
     protected $guarded=[];
+
+    public function quotes()
+    {
+        return $this->belongsToMany(Quote::class)->withPivot('quantity');
+    }
 }

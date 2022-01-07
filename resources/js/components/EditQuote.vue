@@ -40,11 +40,11 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="product in productList" :key="product.id">
-                <td>{{ product.quote_id }}<!--{{ product.name }}--></td>
-                <td>{{ product.product_id }}<!--{{ product.description }}--></td>
-                <td>{{ product.quantity }}</td>
-                <td><!--{{ product.price }}--></td>
+            <tr v-for="product in quote.products">
+                <td>{{ product.name }}</td>
+                <td>{{ product.description }}</td>
+                <td>{{ product.pivot.quantity }}</td>
+                <td>{{ product.price }}</td>
                 <td>
                     <div class="btn-group" role="group">
 <!--                        <button class="btn btn-secondary" @click="decreaseProduct(productList.id)">-</button>-->
@@ -63,15 +63,13 @@ export default {
     data() {
         return {
             quote: {},
-            productList: {}
         }
     },
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/quotes/edit/${this.$route.params.id}`)
                 .then(response => {
-                    this.quote = response.data.quote;
-                    this.productList = response.data.productList;
+                    this.quote = response.data;
                 })
                 .catch(function (error) {
                     console.error(error);
