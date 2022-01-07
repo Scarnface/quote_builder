@@ -41,7 +41,7 @@ class QuoteController extends Controller
     public function update($id, Request $request)
     {
         $quote = Quote::find($id);
-        $quote->update($request->all());
+        $quote->update($request->except(['products']));
 
         return response()->json('The quote successfully updated');
     }

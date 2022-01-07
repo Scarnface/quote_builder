@@ -3,7 +3,7 @@
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\QuoteController;
 use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\ProductListController;
+use App\Http\Controllers\API\ProductQuoteController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [UserController::class, 'login']);
@@ -27,9 +27,9 @@ Route::group(['prefix' => 'products', 'middleware' => 'auth:sanctum'], function 
 });
 
 Route::group(['prefix' => 'productLists', 'middleware' => 'auth:sanctum'], function () {
-    Route::get('/{id}', [ProductListController::class, 'index']);
-    Route::post('add', [ProductListController::class, 'add']);
-    Route::get('edit/{id}', [ProductListController::class, 'edit']);
-    Route::post('update/{id}', [ProductListController::class, 'update']);
-    Route::delete('delete/{id}', [ProductListController::class, 'delete']);
+    Route::get('/{id}', [ProductQuoteController::class, 'index']);
+    Route::post('add', [ProductQuoteController::class, 'add']);
+    Route::get('edit/{id}', [ProductQuoteController::class, 'edit']);
+    Route::post('update/{id}', [ProductQuoteController::class, 'update']);
+    Route::delete('delete/{id}', [ProductQuoteController::class, 'delete']);
 });
