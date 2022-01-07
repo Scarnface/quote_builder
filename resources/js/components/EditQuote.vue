@@ -34,8 +34,8 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>Quantity</th>
                 <th>Price</th>
+                <th>Quantity</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -43,13 +43,13 @@
             <tr v-for="product in quote.products">
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
-                <td>{{ product.pivot.quantity }}</td>
                 <td>{{ product.price }}</td>
+                <td>{{ product.pivot.quantity }}</td>
                 <td>
                     <div class="btn-group" role="group">
-<!--                        <button class="btn btn-secondary" @click="decreaseProduct(productList.id)">-</button>-->
-<!--                        <button class="btn btn-secondary" @click="increaseProduct(productList.id)">+</button>-->
-<!--                        <button class="btn btn-danger" @click="deleteProduct(productList.id)">Delete</button>-->
+                        <button class="btn btn-secondary" @click="decreaseProduct(productList.id)">&nbsp;-&nbsp;</button>
+                        <button class="btn btn-secondary" @click="increaseProduct(productList.id)">&nbsp;+&nbsp;</button>
+                        <button class="btn btn-danger" @click="deleteProduct(productList.id)">Delete</button>
                     </div>
                 </td>
             </tr>
