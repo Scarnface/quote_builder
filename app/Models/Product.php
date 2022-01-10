@@ -13,6 +13,6 @@ class Product extends Model
 
     public function quotes()
     {
-        return $this->belongsToMany(Quote::class)->withPivot('quantity');
+        return $this->belongsToMany(Quote::class)->withPivot('id','quantity');
     }
 }

@@ -58,9 +58,9 @@
                 <td>{{ product.pivot.quantity }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button class="btn btn-secondary" @click="decreaseProduct(productList.id)">&nbsp;-&nbsp;</button>
-                        <button class="btn btn-secondary" @click="increaseProduct(productList.id)">&nbsp;+&nbsp;</button>
-                        <button class="btn btn-danger" @click="deleteProduct(productList.id)">Delete</button>
+                        <button class="btn btn-secondary" @click="decreaseProduct(product.pivot.id)">&nbsp;-&nbsp;</button>
+                        <button class="btn btn-secondary" @click="increaseProduct(product.pivot.id)">&nbsp;+&nbsp;</button>
+                        <button class="btn btn-danger" @click="deleteProduct(product.pivot.id)">Delete</button>
                     </div>
                 </td>
             </tr>

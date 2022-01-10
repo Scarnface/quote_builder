@@ -22938,12 +22938,60 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    updateQuote: function updateQuote() {
+    increaseProduct: function increaseProduct(id) {
       var _this2 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this2.$axios.post("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
-          _this2.$router.push({
+        _this2.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
+          var i = _this2.quote.products.map(function (item) {
+            return item.id;
+          }).indexOf(id); // find index of your object
+
+
+          _this2.quote.products.splice(i, 1);
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
+    },
+    decreaseProduct: function decreaseProduct(id) {
+      var _this3 = this;
+
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this3.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
+          var i = _this3.quote.products.map(function (item) {
+            return item.id;
+          }).indexOf(id); // find index of your object
+
+
+          _this3.quote.products.splice(i, 1);
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
+    },
+    deleteProduct: function deleteProduct(id) {
+      var _this4 = this;
+
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this4.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
+          var i = _this4.quote.products.map(function (item) {
+            return item.id;
+          }).indexOf(id); // find index of your object
+
+
+          _this4.quote.products.splice(i, 1);
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
+    },
+    updateQuote: function updateQuote() {
+      var _this5 = this;
+
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this5.$axios.post("/api/quotes/update/".concat(_this5.$route.params.id), _this5.quote).then(function (response) {
+          _this5.$router.push({
             name: 'quotes'
           });
         })["catch"](function (error) {
@@ -23792,6 +23840,9 @@ var _hoisted_23 = {
   "class": "btn-group",
   role: "group"
 };
+var _hoisted_24 = ["onClick"];
+var _hoisted_25 = ["onClick"];
+var _hoisted_26 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
@@ -23848,20 +23899,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
-      onClick: _cache[5] || (_cache[5] = function ($event) {
-        return _ctx.decreaseProduct(_ctx.productList.id);
-      })
-    }, " - "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      onClick: function onClick($event) {
+        return $options.decreaseProduct(product.pivot.id);
+      }
+    }, " - ", 8
+    /* PROPS */
+    , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
-      onClick: _cache[6] || (_cache[6] = function ($event) {
-        return _ctx.increaseProduct(_ctx.productList.id);
-      })
-    }, " + "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      onClick: function onClick($event) {
+        return $options.increaseProduct(product.pivot.id);
+      }
+    }, " + ", 8
+    /* PROPS */
+    , _hoisted_25), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger",
-      onClick: _cache[7] || (_cache[7] = function ($event) {
-        return _ctx.deleteProduct(_ctx.productList.id);
-      })
-    }, "Delete")])])]);
+      onClick: function onClick($event) {
+        return $options.deleteProduct(product.pivot.id);
+      }
+    }, "Delete", 8
+    /* PROPS */
+    , _hoisted_26)])])]);
   }), 256
   /* UNKEYED_FRAGMENT */
   ))])])])], 64

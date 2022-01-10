@@ -26,7 +26,7 @@ Route::group(['prefix' => 'products', 'middleware' => 'auth:sanctum'], function 
     Route::delete('delete/{id}', [ProductController::class, 'delete']);
 });
 
-Route::group(['prefix' => 'productLists', 'middleware' => 'auth:sanctum'], function () {
+Route::group(['prefix' => 'productQuote', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/{id}', [ProductQuoteController::class, 'index']);
     Route::post('add', [ProductQuoteController::class, 'add']);
     Route::get('edit/{id}', [ProductQuoteController::class, 'edit']);
