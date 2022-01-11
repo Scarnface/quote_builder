@@ -73,7 +73,9 @@
 export default {
     data() {
         return {
-            quote: {},
+            quote: {
+                products: {}
+            },
         }
     },
     created() {
@@ -103,19 +105,6 @@ export default {
         }
     },
     methods: {
-        //--------------------------------------TODO
-        // decreaseProduct(id) {
-        //     this.$axios.get('/sanctum/csrf-cookie').then(response => {
-        //         this.$axios.post(`/api/productQuote/update/${id}`)
-        //             .then(response => {
-        //                 this.$router.push({name: 'quotes'});
-        //             })
-        //             .catch(function (error) {
-        //                 console.error(error);
-        //             });
-        //     })
-        // },
-        //--------------------------------------TODO
         updateQuote() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post(`/api/quotes/update/${this.$route.params.id}`, this.quote)
