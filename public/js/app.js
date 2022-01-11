@@ -22938,60 +22938,25 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    increaseProduct: function increaseProduct(id) {
+    //--------------------------------------TODO
+    // decreaseProduct(id) {
+    //     this.$axios.get('/sanctum/csrf-cookie').then(response => {
+    //         this.$axios.post(`/api/productQuote/update/${id}`)
+    //             .then(response => {
+    //                 this.$router.push({name: 'quotes'});
+    //             })
+    //             .catch(function (error) {
+    //                 console.error(error);
+    //             });
+    //     })
+    // },
+    //--------------------------------------TODO
+    updateQuote: function updateQuote() {
       var _this2 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this2.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
-          var i = _this2.quote.products.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this2.quote.products.splice(i, 1);
-        })["catch"](function (error) {
-          console.error(error);
-        });
-      });
-    },
-    decreaseProduct: function decreaseProduct(id) {
-      var _this3 = this;
-
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this3.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
-          var i = _this3.quote.products.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this3.quote.products.splice(i, 1);
-        })["catch"](function (error) {
-          console.error(error);
-        });
-      });
-    },
-    deleteProduct: function deleteProduct(id) {
-      var _this4 = this;
-
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this4.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
-          var i = _this4.quote.products.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this4.quote.products.splice(i, 1);
-        })["catch"](function (error) {
-          console.error(error);
-        });
-      });
-    },
-    updateQuote: function updateQuote() {
-      var _this5 = this;
-
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this5.$axios.post("/api/quotes/update/".concat(_this5.$route.params.id), _this5.quote).then(function (response) {
-          _this5.$router.push({
+        _this2.$axios.post("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
+          _this2.$router.push({
             name: 'quotes'
           });
         })["catch"](function (error) {
@@ -23900,21 +23865,21 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
       onClick: function onClick($event) {
-        return $options.decreaseProduct(product.pivot.id);
+        return _ctx.decreaseProduct(product.pivot.id);
       }
     }, " - ", 8
     /* PROPS */
     , _hoisted_24), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
       onClick: function onClick($event) {
-        return $options.increaseProduct(product.pivot.id);
+        return _ctx.increaseProduct(product.pivot.id);
       }
     }, " + ", 8
     /* PROPS */
     , _hoisted_25), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
-        return $options.deleteProduct(product.pivot.id);
+        return _ctx.deleteProduct(product.pivot.id);
       }
     }, "Delete", 8
     /* PROPS */
