@@ -22940,19 +22940,6 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    //--------------------------------------TODO
-    // decreaseProduct(id) {
-    //     this.$axios.get('/sanctum/csrf-cookie').then(response => {
-    //         this.$axios.post(`/api/productQuote/update/${id}`)
-    //             .then(response => {
-    //                 this.$router.push({name: 'quotes'});
-    //             })
-    //             .catch(function (error) {
-    //                 console.error(error);
-    //             });
-    //     })
-    // },
-    //--------------------------------------TODO
     updateQuote: function updateQuote() {
       var _this2 = this;
 
