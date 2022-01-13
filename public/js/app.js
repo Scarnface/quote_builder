@@ -22905,6 +22905,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -22926,20 +22928,37 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     subTotal: function subTotal() {
-      return this.quote.products.reduce(function (a, c) {
-        return a + Number(c.price * c.pivot.quantity || 0);
-      }, 0);
+      var resultArray = this.objToArray(this.quote.products);
+      return this.calculateSubTotal(resultArray);
     },
     vat: function vat() {
-      return this.quote.products.reduce(function (a, c) {
-        return a + Number(c.price * c.pivot.quantity * 0.2 || 0);
-      }, 0).toFixed(2);
+      return Number(this.subTotal * 0.2).toFixed(2);
     },
     total: function total() {
       return Number(this.subTotal) + Number(this.vat);
     }
   },
   methods: {
+    objToArray: function objToArray(obj) {
+      var result = [];
+
+      for (var prop in obj) {
+        var value = obj[prop];
+
+        if (_typeof(value) === 'object') {
+          result.push(this.objToArray(value));
+        } else {
+          result.push(value);
+        }
+      }
+
+      return result;
+    },
+    calculateSubTotal: function calculateSubTotal(array) {
+      return array.reduce(function (a, c) {
+        return a + Number(c[3] * c[4][3] || 0);
+      }, 0);
+    },
     updateQuote: function updateQuote() {
       var _this2 = this;
 

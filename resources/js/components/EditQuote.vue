@@ -91,20 +91,34 @@ export default {
     },
     computed: {
         subTotal: function() {
-            return this.quote.products.reduce(function(a, c) {
-                return a + Number((c.price*c.pivot.quantity) || 0)
-            }, 0)
+            const resultArray =  this.objToArray(this.quote.products);
+            return this.calculateSubTotal(resultArray);
         },
         vat: function() {
-            return this.quote.products.reduce(function(a, c) {
-                return a + Number((c.price*c.pivot.quantity)*0.2 || 0)
-            }, 0).toFixed(2)
+            return Number(this.subTotal*0.2).toFixed(2);
         },
         total: function() {
-            return Number(this.subTotal) + Number(this.vat)
+            return Number(this.subTotal) + Number(this.vat);
         }
     },
     methods: {
+        objToArray(obj) {
+            const result = [];
+            for (const prop in obj) {
+                const value = obj[prop];
+                if (typeof value === 'object') {
+                    result.push(this.objToArray(value));
+                } else {
+                    result.push(value);
+                }
+            }
+            return result
+        },
+        calculateSubTotal(array) {
+            return array.reduce(function(a, c) {
+                return a + Number((c[3]*c[4][3]) || 0)
+            }, 0)
+        },
         updateQuote() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post(`/api/quotes/update/${this.$route.params.id}`, this.quote)
