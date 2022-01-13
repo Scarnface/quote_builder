@@ -106,6 +106,7 @@ export default {
             const result = [];
             for (const prop in obj) {
                 const value = obj[prop];
+                // If nested object, recurse
                 if (typeof value === 'object') {
                     result.push(this.objToArray(value));
                 } else {
@@ -116,6 +117,7 @@ export default {
         },
         calculateSubTotal(array) {
             return array.reduce(function(a, c) {
+                // products.price * products.pivot.quantity
                 return a + Number((c[3]*c[4][3]) || 0)
             }, 0)
         },
