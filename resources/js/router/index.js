@@ -5,12 +5,12 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 
-import Quotes from '../components/Quotes';
-import AddQuote from '../components/AddQuote';
-import EditQuote from '../components/EditQuote';
-import Products from '../components/Products';
-import AddProduct from '../components/AddProduct';
-import EditProduct from '../components/EditProduct';
+import Quotes from '../components/quotes/Quotes';
+import AddQuote from '../components/quotes/AddQuote';
+import EditQuote from '../components/quotes/EditQuote';
+import Products from '../components/products/Products';
+import AddProduct from '../components/products/AddProduct';
+import EditProduct from '../components/products/EditProduct';
 
 export const routes = [
     {
