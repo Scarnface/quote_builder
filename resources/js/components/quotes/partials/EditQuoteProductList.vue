@@ -14,21 +14,22 @@ Vue.component('edit-quote-product-list', {
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="product in quote.products">
+                <tr v-for="product in quote.products" :key="product.id">
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price }}</td>
                     <td>{{ product.pivot.quantity }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button class="btn btn-secondary" @click="decreaseProduct(product.pivot.id)">&nbsp;-&nbsp;</button>
-                            <button class="btn btn-secondary" @click="increaseProduct(product.pivot.id)">&nbsp;+&nbsp;</button>
-                            <button class="btn btn-danger" @click="deleteProduct(product.pivot.id)">Delete</button>
+                            <button class="btn btn-secondary" @click="product.pivot.quantity--">&nbsp;-&nbsp;</button>
+                            <button class="btn btn-secondary" @click="product.pivot.quantity++">&nbsp;+&nbsp;</button>
+                            <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
                         </div>
                     </td>
                 </tr>
                 </tbody>
             </table>
+            <button class="btn btn-primary" @click="updateProductQuote()">Save Products</button>
         </div>
     </template>
 
@@ -37,6 +38,14 @@ Vue.component('edit-quote-product-list', {
         props: {
             quote: {
                 type: Object,
+            }
+        },
+        methods: {
+            deleteProduct(id) {
+
+            },
+            updateProductQuote() {
+                //Save pivot table here
             }
         }
     }
