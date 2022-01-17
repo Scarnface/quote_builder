@@ -23151,9 +23151,31 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    deleteProduct: function deleteProduct(id) {},
+    deleteProduct: function deleteProduct(id) {
+      var _this = this;
+
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
+          var i = _this.quote.products.map(function (item) {
+            return item.id;
+          }).indexOf(id); // find index of your object
+
+
+          _this.quote.products.splice(i, 1);
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
+    },
     updateProductQuote: function updateProductQuote() {//Save pivot table here
     }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
+    }
+
+    next();
   }
 });
 
