@@ -28,16 +28,18 @@
         </div>
         <edit-quote-billing :quote="quote" />
     </div>
-
+    <edit-quote-product-search />
     <edit-quote-product-list :quote="quote" />
 </template>
 
 <script>
 import EditQuoteBilling from "./partials/EditQuoteBilling";
 import EditQuoteProductList from "./partials/EditQuoteProductList";
+import EditQuoteProductSearch from "./partials/EditQuoteProductSearch";
 
 export default {
     components : {
+        EditQuoteProductSearch,
         EditQuoteProductList,
         EditQuoteBilling,
     },

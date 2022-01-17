@@ -20,6 +20,7 @@ Route::group(['prefix' => 'quotes', 'middleware' => 'auth:sanctum'], function ()
 
 Route::group(['prefix' => 'products', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [ProductController::class, 'index']);
+    Route::get('/livesearch', [ProductController::class, 'getProducts']);
     Route::post('add', [ProductController::class, 'add']);
     Route::get('edit/{id}', [ProductController::class, 'edit']);
     Route::post('update/{id}', [ProductController::class, 'update']);

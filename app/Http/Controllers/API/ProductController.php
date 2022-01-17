@@ -15,6 +15,17 @@ class ProductController extends Controller
         return array_reverse($products);
     }
 
+    // live search
+    public function getProducts(Request $request)
+    {
+        $products = Product::where('name', 'like', '%'.$request->keyword.'%')
+            ->orWhere('description', 'like', '%'.$request->keyword.'%')
+            ->orderBy('name', 'asc')
+            ->get();
+
+        return response()->json($products);
+    }
+
     // add product
     public function add(Request $request)
     {
