@@ -23186,26 +23186,28 @@ __webpack_require__.r(__webpack_exports__);
     getResults: function getResults() {
       var _this = this;
 
-      // this.$axios.get('/sanctum/csrf-cookie').then(response => {
-      this.$axios.get('/api/products/livesearch', {
-        params: {
-          keyword: this.keyword
-        }
-      }).then(function (response) {
-        _this.products = response.data;
-      })["catch"](function (error) {
-        console.error(error);
-      }); // })
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this.$axios.get('/api/products/livesearch', {
+          params: {
+            keyword: _this.keyword
+          }
+        }).then(function (response) {
+          _this.products = response.data;
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
     },
     addToQuote: function addToQuote() {// Add the item to the product list
     }
-  } // beforeRouteEnter(to, from, next) {
-  //     if (!window.Laravel.isLoggedin) {
-  //         window.location.href = "/";
-  //     }
-  //     next();
-  // }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
+    }
 
+    next();
+  }
 });
 
 /***/ }),

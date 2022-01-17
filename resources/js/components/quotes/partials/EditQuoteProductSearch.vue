@@ -46,7 +46,7 @@ Vue.component('edit-quote-product-search', {
         },
         methods: {
             getResults() {
-                // this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
                     this.$axios.get('/api/products/livesearch', { params: { keyword: this.keyword } })
                         .then(response => {
                             this.products = response.data;
@@ -54,18 +54,18 @@ Vue.component('edit-quote-product-search', {
                         .catch(function (error) {
                             console.error(error);
                         });
-                // })
+                })
             },
             addToQuote() {
                 // Add the item to the product list
             },
         },
-        // beforeRouteEnter(to, from, next) {
-        //     if (!window.Laravel.isLoggedin) {
-        //         window.location.href = "/";
-        //     }
-        //     next();
-        // }
+        beforeRouteEnter(to, from, next) {
+            if (!window.Laravel.isLoggedin) {
+                window.location.href = "/";
+            }
+            next();
+        }
     }
     </script>
 })
