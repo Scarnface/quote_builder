@@ -24219,7 +24219,7 @@ var _hoisted_5 = {
   "class": "btn-group",
   role: "group"
 };
-var _hoisted_6 = ["onClick"];
+var _hoisted_6 = ["disabled", "onClick"];
 var _hoisted_7 = ["onClick"];
 var _hoisted_8 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -24236,6 +24236,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-secondary",
+      disabled: product.pivot.quantity === 1,
       onClick: function onClick($event) {
         return product.pivot.quantity--;
       }
