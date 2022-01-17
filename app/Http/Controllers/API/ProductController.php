@@ -20,7 +20,7 @@ class ProductController extends Controller
     {
         $products = Product::where('name', 'like', '%'.$request->keyword.'%')
             ->orWhere('description', 'like', '%'.$request->keyword.'%')
-            ->orderBy('name', 'asc')
+            ->orderByRaw('name like ? desc', $request->keyword)
             ->get();
 
         return response()->json($products);

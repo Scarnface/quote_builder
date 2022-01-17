@@ -46,15 +46,19 @@ Vue.component('edit-quote-product-search', {
         },
         methods: {
             getResults() {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.get('/api/products/livesearch', { params: { keyword: this.keyword } })
-                        .then(response => {
-                            this.products = response.data;
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
-                })
+                if(this.keyword !== '') {
+                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                        this.$axios.get('/api/products/livesearch', { params: { keyword: this.keyword } })
+                            .then(response => {
+                                this.products = response.data;
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
+                    })
+                } else {
+                    this.products = {};
+                }
             },
             addToQuote() {
                 // Add the item to the product list

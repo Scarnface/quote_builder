@@ -23208,17 +23208,21 @@ __webpack_require__.r(__webpack_exports__);
     getResults: function getResults() {
       var _this = this;
 
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this.$axios.get('/api/products/livesearch', {
-          params: {
-            keyword: _this.keyword
-          }
-        }).then(function (response) {
-          _this.products = response.data;
-        })["catch"](function (error) {
-          console.error(error);
+      if (this.keyword !== '') {
+        this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+          _this.$axios.get('/api/products/livesearch', {
+            params: {
+              keyword: _this.keyword
+            }
+          }).then(function (response) {
+            _this.products = response.data;
+          })["catch"](function (error) {
+            console.error(error);
+          });
         });
-      });
+      } else {
+        this.products = {};
+      }
     },
     addToQuote: function addToQuote() {// Add the item to the product list
     }
