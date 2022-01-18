@@ -21,7 +21,7 @@ Vue.component('edit-quote-product-search', {
                         <td>{{ product.price }}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button class="btn btn-primary" @click="addToQuote(product.id)">Add</button>
+                                <button class="btn btn-primary" @click="this.$emit('updateproductlist', product)">Add</button>
                             </div>
                         </td>
                     </tr>
@@ -59,9 +59,6 @@ Vue.component('edit-quote-product-search', {
                 } else {
                     this.products = {};
                 }
-            },
-            addToQuote() {
-                // Add the item to the product list
             },
         },
         beforeRouteEnter(to, from, next) {

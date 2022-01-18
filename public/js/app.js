@@ -23005,6 +23005,27 @@ __webpack_require__.r(__webpack_exports__);
           console.error(error);
         });
       });
+    },
+    addProduct: function addProduct(product) {
+      var _this3 = this;
+
+      var updateData = {
+        quote_id: this.quote.id,
+        product_id: product.id
+      };
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this3.$axios.post('/api/productQuote/add/', updateData).then(function (response) {
+          var i = _this3.quote.products.length + 1;
+          _this3.quote.products[i] = {
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: product.price
+          };
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -23054,8 +23075,7 @@ __webpack_require__.r(__webpack_exports__);
         _this2.$axios["delete"]("/api/quotes/delete/".concat(id)).then(function (response) {
           var i = _this2.quotes.map(function (item) {
             return item.id;
-          }).indexOf(id); // find index of your object
-
+          }).indexOf(id);
 
           _this2.quotes.splice(i, 1);
         })["catch"](function (error) {
@@ -23150,6 +23170,11 @@ __webpack_require__.r(__webpack_exports__);
       type: Object
     }
   },
+  watch: {
+    quote: {
+      deep: true
+    }
+  },
   methods: {
     deleteProduct: function deleteProduct(id) {
       var _this = this;
@@ -23166,8 +23191,6 @@ __webpack_require__.r(__webpack_exports__);
           console.error(error);
         });
       });
-    },
-    updateProductQuote: function updateProductQuote() {//Save pivot table here
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -23223,8 +23246,6 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.products = {};
       }
-    },
-    addToQuote: function addToQuote() {// Add the item to the product list
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -24056,7 +24077,11 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     quote: $data.quote
   }, null, 8
   /* PROPS */
-  , ["quote"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_search), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_list, {
+  , ["quote"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_search, {
+    onUpdateproductlist: $options.addProduct
+  }, null, 8
+  /* PROPS */
+  , ["onUpdateproductlist"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_list, {
     quote: $data.quote
   }, null, 8
   /* PROPS */
@@ -24285,12 +24310,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_8)])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-    "class": "btn btn-primary",
-    onClick: _cache[0] || (_cache[0] = function ($event) {
-      return $options.updateProductQuote();
-    })
-  }, "Save Products")]);
+  ))])])]);
 }
 
 /***/ }),
@@ -24333,6 +24353,8 @@ var _hoisted_5 = {
 };
 var _hoisted_6 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
@@ -24354,7 +24376,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-primary",
       onClick: function onClick($event) {
-        return $options.addToQuote(product.id);
+        return _this.$emit('updateproductlist', product);
       }
     }, "Add", 8
     /* PROPS */

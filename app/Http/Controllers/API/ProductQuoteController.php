@@ -9,9 +9,9 @@ use Illuminate\Http\Request;
 class ProductQuoteController extends Controller
 {
     // all productQuotes
-    public function index($id)
+    public function index()
     {
-        $productQuote = ProductQuote::find($id);
+        $productQuote = ProductQuote::all()->toArray();
         return response()->json($productQuote);
     }
 

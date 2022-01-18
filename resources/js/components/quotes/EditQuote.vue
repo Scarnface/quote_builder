@@ -28,7 +28,7 @@
         </div>
         <edit-quote-billing :quote="quote" />
     </div>
-    <edit-quote-product-search />
+    <edit-quote-product-search @updateproductlist="addProduct" />
     <edit-quote-product-list :quote="quote" />
 </template>
 
@@ -72,7 +72,28 @@ export default {
                         console.error(error);
                     });
             })
-        }
+        },
+        addProduct(product) {
+            const updateData = {
+                quote_id: this.quote.id,
+                product_id: product.id,
+            }
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.post('/api/productQuote/add/', updateData)
+                    .then(response => {
+                        const i = this.quote.products.length + 1;
+                        this.quote.products[i] = {
+                            id: product.id,
+                            name: product.name,
+                            description: product.description,
+                            price: product.price,
+                        };
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+        },
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {

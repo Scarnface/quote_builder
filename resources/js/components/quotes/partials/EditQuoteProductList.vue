@@ -29,7 +29,6 @@ Vue.component('edit-quote-product-list', {
                 </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary" @click="updateProductQuote()">Save Products</button>
         </div>
     </template>
 
@@ -38,6 +37,11 @@ Vue.component('edit-quote-product-list', {
         props: {
             quote: {
                 type: Object,
+            }
+        },
+        watch: {
+            quote: {
+                deep: true,
             }
         },
         methods: {
@@ -53,9 +57,6 @@ Vue.component('edit-quote-product-list', {
                         });
                 })
             },
-            updateProductQuote() {
-                //Save pivot table here
-            }
         },
         beforeRouteEnter(to, from, next) {
             if (!window.Laravel.isLoggedin) {
