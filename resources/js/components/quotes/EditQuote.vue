@@ -78,12 +78,12 @@ export default {
                 quote_id: this.quote.id,
                 product_id: product.id,
             }
-            const i = this.quote.products.length + 1;
 
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/productQuote/add/', updateData)
                     .then(response => {
-                        this.quote.products["i"] = {
+                        const i = this.quote.products.length + 1;
+                        this.quote.products[i] = {
                             id: product.id,
                             name: product.name,
                             description: product.description,

@@ -23013,10 +23013,10 @@ __webpack_require__.r(__webpack_exports__);
         quote_id: this.quote.id,
         product_id: product.id
       };
-      var i = this.quote.products.length + 1;
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this3.$axios.post('/api/productQuote/add/', updateData).then(function (response) {
-          _this3.quote.products["i"] = {
+          var i = _this3.quote.products.length + 1;
+          _this3.quote.products[i] = {
             id: product.id,
             name: product.name,
             description: product.description,
