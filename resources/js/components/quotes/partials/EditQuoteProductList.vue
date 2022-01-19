@@ -23,7 +23,7 @@ Vue.component('edit-quote-product-list', {
                         <div class="btn-group" role="group">
                             <button class="btn btn-secondary" :disabled="product.pivot.quantity === 1" @click="product.pivot.quantity--">&nbsp;-&nbsp;</button>
                             <button class="btn btn-secondary" @click="product.pivot.quantity++">&nbsp;+&nbsp;</button>
-                            <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
+                            <button class="btn btn-danger" @click="deleteProduct(product.pivot.id)">Delete</button>
                         </div>
                     </td>
                 </tr>

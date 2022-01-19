@@ -23013,14 +23013,15 @@ __webpack_require__.r(__webpack_exports__);
         quote_id: this.quote.id,
         product_id: product.id
       };
+      var i = this.quote.products.length + 1;
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this3.$axios.post('/api/productQuote/add/', updateData).then(function (response) {
-          var i = _this3.quote.products.length + 1;
-          _this3.quote.products[i] = {
+          _this3.quote.products["i"] = {
             id: product.id,
             name: product.name,
             description: product.description,
-            price: product.price
+            price: product.price,
+            pivot: product.pivot
           };
         })["catch"](function (error) {
           console.error(error);
@@ -24303,7 +24304,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
-        return $options.deleteProduct(product.id);
+        return $options.deleteProduct(product.pivot.id);
       }
     }, "Delete", 8
     /* PROPS */
