@@ -22993,7 +22993,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    updateQuote: function updateQuote() {
+    saveClientDetails: function saveClientDetails() {
       var _this2 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
@@ -23006,27 +23006,46 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    addProduct: function addProduct(product) {
-      var _this3 = this;
-
-      var updateData = {
+    addQuoteProduct: function addQuoteProduct(product) {
+      var pivot = {
         quote_id: this.quote.id,
-        product_id: product.id
+        product_id: product.id,
+        quantity: 1
       };
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this3.$axios.post('/api/productQuote/add/', updateData).then(function (response) {
-          var i = _this3.quote.products.length + 1;
-          _this3.quote.products[i] = {
-            id: product.id,
-            name: product.name,
-            description: product.description,
-            price: product.price,
-            pivot: product.pivot
-          };
-        })["catch"](function (error) {
-          console.error(error);
-        });
-      });
+      var i = product.length + 1;
+      product.splice(i, 0, pivot);
+      console.log(product);
+      var j = this.quote.products.length + 1;
+      this.quote.products.splice(j, 0, product);
+    },
+    deleteQuoteProduct: function deleteQuoteProduct(id) {
+      var i = this.quote.products.map(function (item) {
+        return item.id;
+      }).indexOf(id);
+      this.quote.products.splice(i, 1);
+    },
+    saveQuoteDetails: function saveQuoteDetails(quote) {// const updateData = {
+      //     quote_id: this.quote.id,
+      //     product_id: product.id,
+      // }
+      //
+      // this.$axios.get('/sanctum/csrf-cookie').then(response => {
+      //     this.$axios.post('/api/productQuote/add/', updateData)
+      //         .catch(function (error) {
+      //             console.error(error);
+      //         });
+      // })
+      //
+      // this.$axios.get('/sanctum/csrf-cookie').then(response => {
+      //     this.$axios.delete(`/api/productQuote/delete/${id}`)
+      //         .then(response => {
+      //             let i = this.quote.products.map(item => item.id).indexOf(id); // find index of your object
+      //             this.quote.products.splice(i, 1)
+      //         })
+      //         .catch(function (error) {
+      //             console.error(error);
+      //         });
+      // })
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -23175,31 +23194,6 @@ __webpack_require__.r(__webpack_exports__);
     quote: {
       deep: true
     }
-  },
-  methods: {
-    deleteProduct: function deleteProduct(id) {
-      var _this = this;
-
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this.$axios["delete"]("/api/productQuote/delete/".concat(id)).then(function (response) {
-          var i = _this.quote.products.map(function (item) {
-            return item.id;
-          }).indexOf(id); // find index of your object
-
-
-          _this.quote.products.splice(i, 1);
-        })["catch"](function (error) {
-          console.error(error);
-        });
-      });
-    }
-  },
-  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    if (!window.Laravel.isLoggedin) {
-      window.location.href = "/";
-    }
-
-    next();
   }
 });
 
@@ -23220,7 +23214,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       keyword: null,
-      products: []
+      products: {}
     };
   },
   watch: {
@@ -24038,7 +24032,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
     onSubmit: _cache[4] || (_cache[4] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
-      return $options.updateQuote && $options.updateQuote.apply($options, arguments);
+      return $options.saveClientDetails && $options.saveClientDetails.apply($options, arguments);
     }, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
@@ -24079,14 +24073,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, null, 8
   /* PROPS */
   , ["quote"])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_search, {
-    onUpdateproductlist: $options.addProduct
+    onAddquoteproduct: $options.addQuoteProduct
   }, null, 8
   /* PROPS */
-  , ["onUpdateproductlist"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_list, {
-    quote: $data.quote
+  , ["onAddquoteproduct"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_list, {
+    quote: $data.quote,
+    onDeletequoteproduct: $options.deleteQuoteProduct
   }, null, 8
   /* PROPS */
-  , ["quote"])], 64
+  , ["quote", "onDeletequoteproduct"])], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -24275,6 +24270,8 @@ var _hoisted_6 = ["disabled", "onClick"];
 var _hoisted_7 = ["onClick"];
 var _hoisted_8 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _this = this;
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, _hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.quote.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: product.id
@@ -24304,7 +24301,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
-        return $options.deleteProduct(product.pivot.id);
+        return _this.$emit('deletequoteproduct', product.id);
       }
     }, "Delete", 8
     /* PROPS */
@@ -24377,7 +24374,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-primary",
       onClick: function onClick($event) {
-        return _this.$emit('updateproductlist', product);
+        return _this.$emit('addquoteproduct', product);
       }
     }, "Add", 8
     /* PROPS */

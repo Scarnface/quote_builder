@@ -21,7 +21,7 @@ Vue.component('edit-quote-product-search', {
                         <td>{{ product.price }}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button class="btn btn-primary" @click="this.$emit('updateproductlist', product)">Add</button>
+                                <button class="btn btn-primary" @click="this.$emit('addquoteproduct', product)">Add</button>
                             </div>
                         </td>
                     </tr>
@@ -36,7 +36,7 @@ Vue.component('edit-quote-product-search', {
         data() {
             return {
                 keyword: null,
-                products: []
+                products: {}
             }
         },
         watch: {

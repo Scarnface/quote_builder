@@ -4,7 +4,7 @@
             <h4 class="text-center">Edit Client Details</h4>
             <div class="row">
                 <div class="col-md-6">
-                    <form @submit.prevent="updateQuote">
+                    <form @submit.prevent="saveClientDetails">
                         <div class="form-group">
                             <label>First Name</label>
                             <input type="text" class="form-control" v-model="quote.first_name">
@@ -28,8 +28,11 @@
         </div>
         <edit-quote-billing :quote="quote" />
     </div>
-    <edit-quote-product-search @updateproductlist="addProduct" />
-    <edit-quote-product-list :quote="quote" />
+    <edit-quote-product-search @addquoteproduct="addQuoteProduct" />
+    <edit-quote-product-list
+        :quote="quote"
+        @deletequoteproduct="deleteQuoteProduct"
+    />
 </template>
 
 <script>
@@ -62,7 +65,7 @@ export default {
         })
     },
     methods: {
-        updateQuote() {
+        saveClientDetails() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post(`/api/quotes/update/${this.$route.params.id}`, this.quote)
                     .then(response => {
@@ -73,29 +76,50 @@ export default {
                     });
             })
         },
-        addProduct(product) {
-            const updateData = {
+        addQuoteProduct(product) {
+            // Why does this work with delete, but not let me use it to add???
+            let pivot = {
                 quote_id: this.quote.id,
                 product_id: product.id,
+                quantity: 1
             }
 
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post('/api/productQuote/add/', updateData)
-                    .then(response => {
-                        const i = this.quote.products.length + 1;
-                        this.quote.products[i] = {
-                            id: product.id,
-                            name: product.name,
-                            description: product.description,
-                            price: product.price,
-                            pivot: product.pivot,
-                        }
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
+            let i = product.length + 1;
+            product.splice(i, 0, pivot)
+
+            console.log(product);
+
+            let j = this.quote.products.length + 1;
+            this.quote.products.splice(j, 0, product)
         },
+        deleteQuoteProduct(id) {
+            let i = this.quote.products.map(item => item.id).indexOf(id);
+            this.quote.products.splice(i, 1)
+        },
+        saveQuoteDetails(quote) {
+            // const updateData = {
+            //     quote_id: this.quote.id,
+            //     product_id: product.id,
+            // }
+            //
+            // this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            //     this.$axios.post('/api/productQuote/add/', updateData)
+            //         .catch(function (error) {
+            //             console.error(error);
+            //         });
+            // })
+            //
+            // this.$axios.get('/sanctum/csrf-cookie').then(response => {
+            //     this.$axios.delete(`/api/productQuote/delete/${id}`)
+            //         .then(response => {
+            //             let i = this.quote.products.map(item => item.id).indexOf(id); // find index of your object
+            //             this.quote.products.splice(i, 1)
+            //         })
+            //         .catch(function (error) {
+            //             console.error(error);
+            //         });
+            // })
+        }
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {

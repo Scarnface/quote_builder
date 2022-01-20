@@ -23,7 +23,7 @@ Vue.component('edit-quote-product-list', {
                         <div class="btn-group" role="group">
                             <button class="btn btn-secondary" :disabled="product.pivot.quantity === 1" @click="product.pivot.quantity--">&nbsp;-&nbsp;</button>
                             <button class="btn btn-secondary" @click="product.pivot.quantity++">&nbsp;+&nbsp;</button>
-                            <button class="btn btn-danger" @click="deleteProduct(product.pivot.id)">Delete</button>
+                            <button class="btn btn-danger" @click="this.$emit('deletequoteproduct', product.id)">Delete</button>
                         </div>
                     </td>
                 </tr>
@@ -44,26 +44,6 @@ Vue.component('edit-quote-product-list', {
                 deep: true,
             }
         },
-        methods: {
-            deleteProduct(id) {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.delete(`/api/productQuote/delete/${id}`)
-                        .then(response => {
-                            let i = this.quote.products.map(item => item.id).indexOf(id); // find index of your object
-                            this.quote.products.splice(i, 1)
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
-                })
-            },
-        },
-        beforeRouteEnter(to, from, next) {
-            if (!window.Laravel.isLoggedin) {
-                window.location.href = "/";
-            }
-            next();
-        }
     }
     </script>
 )}
