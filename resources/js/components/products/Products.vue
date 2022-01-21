@@ -14,7 +14,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="product in products.data" :key="product.id">
+            <tr v-for="product in products" :key="product.id">
                 <td>{{ product.name }}</td>
                 <td>{{ product.description }}</td>
                 <td>{{ product.price }}</td>
@@ -41,7 +41,7 @@ export default {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/products')
                 .then(response => {
-                    this.products = response.data;
+                    this.products = response.data.data;
                 })
                 .catch(function (error) {
                     console.error(error);
@@ -53,8 +53,8 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.delete(`/api/products/delete/${id}`)
                     .then(response => {
-                        let i = this.products.data.map(item => item.id).indexOf(id);
-                        this.products.data.splice(i, 1)
+                        let i = this.products.map(item => item.id).indexOf(id);
+                        this.products.splice(i, 1)
                     })
                     .catch(function (error) {
                         console.error(error);
