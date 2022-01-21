@@ -41,16 +41,16 @@ Vue.component('edit-quote-product-search', {
         },
         watch: {
             keyword(after, before) {
-                this.getResults();
+                this.liveSearch();
             }
         },
         methods: {
-            getResults() {
+            liveSearch() {
                 if(this.keyword !== '') {
                     this.$axios.get('/sanctum/csrf-cookie').then(response => {
                         this.$axios.get('/api/products/livesearch', { params: { keyword: this.keyword } })
                             .then(response => {
-                                this.products = response.data;
+                                this.products = response.data.data;
                             })
                             .catch(function (error) {
                                 console.error(error);

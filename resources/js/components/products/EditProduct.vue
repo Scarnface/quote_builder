@@ -34,7 +34,7 @@ export default {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/products/edit/${this.$route.params.id}`)
                 .then(response => {
-                    this.product = response.data;
+                    this.product = response.data.data;
                 })
                 .catch(function (error) {
                     console.error(error);

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ProductResource;
+use App\Http\Resources\Product as ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -16,14 +16,12 @@ class ProductController extends Controller
     }
 
     // live search
-    public function getProducts(Request $request)
+    public function liveSearch(Request $request)
     {
-        $products = Product::where('name', 'like', '%'.$request->keyword.'%')
+        return ProductResource::collection(Product::where('name', 'like', '%'.$request->keyword.'%')
             ->orWhere('description', 'like', '%'.$request->keyword.'%')
             ->orderByRaw('name like ? desc', $request->keyword)
-            ->get();
-
-        return response()->json($products);
+            ->get());
     }
 
     // add product
@@ -36,14 +34,13 @@ class ProductController extends Controller
         ]);
         $product->save();
 
-        return response()->json('The product successfully added');
+        return response()->json('The product was successfully added');
     }
 
     // edit product
     public function edit($id)
     {
-        $product = Product::find($id);
-        return response()->json($product);
+        return new ProductResource(Product::find($id));
     }
 
     // update product
@@ -52,7 +49,7 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->update($request->all());
 
-        return response()->json('The product successfully updated');
+        return response()->json('The product was successfully updated');
     }
 
     // delete product
@@ -61,6 +58,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        return response()->json('The product successfully deleted');
+        return response()->json('The product was successfully deleted');
     }
 }

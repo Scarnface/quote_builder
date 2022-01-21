@@ -22819,7 +22819,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get("/api/products/edit/".concat(_this.$route.params.id)).then(function (response) {
-        _this.product = response.data;
+        _this.product = response.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -23081,7 +23081,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get('/api/quotes').then(function (response) {
-        _this.quotes = response.data;
+        _this.quotes = response.data.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -23219,11 +23219,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     keyword: function keyword(after, before) {
-      this.getResults();
+      this.liveSearch();
     }
   },
   methods: {
-    getResults: function getResults() {
+    liveSearch: function liveSearch() {
       var _this = this;
 
       if (this.keyword !== '') {
@@ -23233,7 +23233,7 @@ __webpack_require__.r(__webpack_exports__);
               keyword: _this.keyword
             }
           }).then(function (response) {
-            _this.products = response.data;
+            _this.products = response.data.data;
           })["catch"](function (error) {
             console.error(error);
           });

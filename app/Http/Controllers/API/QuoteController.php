@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProductList;
+use App\Http\Resources\Quote as QuoteResource;
 use App\Models\Quote;
 use Illuminate\Http\Request;
 
@@ -12,8 +12,7 @@ class QuoteController extends Controller
     // all quotes
     public function index()
     {
-        $quotes = Quote::all()->toArray();
-        return array_reverse($quotes);
+        return QuoteResource::collection(Quote::all());
     }
 
     // add quote
