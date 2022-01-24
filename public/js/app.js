@@ -23006,17 +23006,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     addQuoteProduct: function addQuoteProduct(product) {
-      // Why does this work with delete, but not let me use it to add???
-      var pivot = {
+      product.pivot = {
         quote_id: this.quote.id,
         product_id: product.id,
         quantity: 1
       };
-      var i = product.length + 1;
-      product.splice(i, 0, pivot);
-      console.log(product);
-      var j = this.quote.products.length + 1;
-      this.quote.products.splice(j, 0, product);
+      var i = this.quote.products.length + 1;
+      this.quote.products.splice(i, 0, product);
     },
     deleteQuoteProduct: function deleteQuoteProduct(id) {
       var i = this.quote.products.map(function (item) {
@@ -23134,10 +23130,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       type: Object
     }
   },
+  watch: {
+    quote: {
+      deep: true
+    }
+  },
   computed: {
     subTotal: function subTotal() {
       var resultArray = this.objToArray(this.quote.products);
-      return this.calculateSubTotal(resultArray).toFixed(2);
+      return resultArray.reduce(function (a, c) {
+        // products.price * products.pivot.quantity
+        return a + Number(c[3] * c[4][3] || 0);
+      }, 0).toFixed(2);
     },
     vat: function vat() {
       return Number(this.subTotal * 0.2).toFixed(2);
@@ -23161,12 +23165,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       }
 
       return result;
-    },
-    calculateSubTotal: function calculateSubTotal(array) {
-      return array.reduce(function (a, c) {
-        // products.price * products.pivot.quantity
-        return a + Number(c[3] * c[4][3] || 0);
-      }, 0);
     }
   }
 });
@@ -23188,11 +23186,6 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     quote: {
       type: Object
-    }
-  },
-  watch: {
-    quote: {
-      deep: true
     }
   }
 });
@@ -24360,9 +24353,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keyword]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [$data.products.length > 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    key: 0
-  }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.keyword]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: product.id
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
@@ -24381,7 +24372,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_6)])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])])])]);
+  ))])])])]);
 }
 
 /***/ }),

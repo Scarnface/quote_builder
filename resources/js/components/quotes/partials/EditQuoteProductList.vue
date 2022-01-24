@@ -38,12 +38,7 @@ Vue.component('edit-quote-product-list', {
             quote: {
                 type: Object,
             }
-        },
-        watch: {
-            quote: {
-                deep: true,
-            }
-        },
+        }
     }
     </script>
 )}

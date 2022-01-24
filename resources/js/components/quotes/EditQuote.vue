@@ -26,9 +26,11 @@
                 </div>
             </div>
         </div>
-        <edit-quote-billing :quote="quote" />
+        <edit-quote-billing
+            :quote="quote" />
     </div>
-    <edit-quote-product-search @addquoteproduct="addQuoteProduct" />
+    <edit-quote-product-search
+        @addquoteproduct="addQuoteProduct" />
     <edit-quote-product-list
         :quote="quote"
         @deletequoteproduct="deleteQuoteProduct"
@@ -77,24 +79,18 @@ export default {
             })
         },
         addQuoteProduct(product) {
-            // Why does this work with delete, but not let me use it to add???
-            let pivot = {
+            product.pivot = {
                 quote_id: this.quote.id,
                 product_id: product.id,
                 quantity: 1
-            }
+            };
 
-            let i = product.length + 1;
-            product.splice(i, 0, pivot)
-
-            console.log(product);
-
-            let j = this.quote.products.length + 1;
-            this.quote.products.splice(j, 0, product)
+            let i = this.quote.products.length + 1;
+            this.quote.products.splice(i, 0, product);
         },
         deleteQuoteProduct(id) {
             let i = this.quote.products.map(item => item.id).indexOf(id);
-            this.quote.products.splice(i, 1)
+            this.quote.products.splice(i, 1);
         },
         saveQuoteDetails(quote) {
             // const updateData = {

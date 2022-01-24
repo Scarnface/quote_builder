@@ -18,10 +18,18 @@ Vue.component('edit-quote-billing', {
                 type:Object,
             }
         },
+        watch: {
+            quote: {
+                deep: true,
+            }
+        },
         computed: {
             subTotal: function () {
                 const resultArray = this.objToArray(this.quote.products);
-                return this.calculateSubTotal(resultArray).toFixed(2);
+                return resultArray.reduce(function (a, c) {
+                    // products.price * products.pivot.quantity
+                    return a + Number((c[3] * c[4][3]) || 0)
+                }, 0).toFixed(2);
             },
             vat: function () {
                 return Number(this.subTotal * 0.2).toFixed(2);
@@ -44,12 +52,6 @@ Vue.component('edit-quote-billing', {
                 }
                 return result
             },
-            calculateSubTotal(array) {
-                return array.reduce(function (a, c) {
-                    // products.price * products.pivot.quantity
-                    return a + Number((c[3] * c[4][3]) || 0)
-                }, 0)
-            }
         }
     }
     </script>

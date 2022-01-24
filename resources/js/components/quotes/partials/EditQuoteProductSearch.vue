@@ -15,7 +15,7 @@ Vue.component('edit-quote-product-search', {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-if="products.length > 0" v-for="product in products" :key="product.id">
+                    <tr v-for="product in products" :key="product.id">
                         <td>{{ product.name }}</td>
                         <td>{{ product.description }}</td>
                         <td>{{ product.price }}</td>
