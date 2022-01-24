@@ -5,7 +5,7 @@ Vue.component('edit-quote-product-search', {
 
             <div>
                 <input type="text" v-model="keyword">
-                <table class="table table-bordered">
+                <table v-if="keyword" class="table table-bordered">
                     <thead>
                     <tr>
                         <th>Name</th>

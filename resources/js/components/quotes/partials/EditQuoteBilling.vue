@@ -18,11 +18,6 @@ Vue.component('edit-quote-billing', {
                 type:Object,
             }
         },
-        watch: {
-            quote: {
-                deep: true,
-            }
-        },
         computed: {
             subTotal: function () {
                 const resultArray = this.objToArray(this.quote.products);
