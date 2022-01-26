@@ -12,7 +12,8 @@ class QuoteController extends Controller
     // all quotes
     public function index()
     {
-        return QuoteResource::collection(Quote::all());
+        $quote =  QuoteResource::collection(Quote::all());
+        return response()->json($quote);
     }
 
     // add quote
@@ -35,7 +36,8 @@ class QuoteController extends Controller
     // edit quote
     public function edit($id)
     {
-        return new QuoteResource(Quote::find($id));
+        $quote = new QuoteResource(Quote::find($id));
+        return response()->json($quote);
     }
 
     // update quote

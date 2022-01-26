@@ -22819,7 +22819,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get("/api/products/edit/".concat(_this.$route.params.id)).then(function (response) {
-        _this.product = response.data.data;
+        _this.product = response.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -22873,7 +22873,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get('/api/products').then(function (response) {
-        _this.products = response.data.data;
+        _this.products = response.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -23077,7 +23077,7 @@ __webpack_require__.r(__webpack_exports__);
 
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get('/api/quotes').then(function (response) {
-        _this.quotes = response.data.data;
+        _this.quotes = response.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -23221,7 +23221,7 @@ __webpack_require__.r(__webpack_exports__);
               keyword: _this.keyword
             }
           }).then(function (response) {
-            _this.products = response.data.data;
+            _this.products = response.data;
           })["catch"](function (error) {
             console.error(error);
           });
@@ -23791,9 +23791,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return _this.$router.push('/products/add');
     })
   }, "Add Product"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
-      key: product.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.description), 1
     /* TEXT */
@@ -23824,8 +23822,8 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }, "Delete", 8
     /* PROPS */
     , _hoisted_7)])])]);
-  }), 128
-  /* KEYED_FRAGMENT */
+  }), 256
+  /* UNKEYED_FRAGMENT */
   ))])])]);
 }
 

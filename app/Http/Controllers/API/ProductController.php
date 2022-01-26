@@ -12,16 +12,18 @@ class ProductController extends Controller
     // all products
     public function index()
     {
-        return ProductResource::collection(Product::all());
+        $product =  ProductResource::collection(Product::all());
+        return response()->json($product);
     }
 
     // live search
     public function liveSearch(Request $request)
     {
-        return ProductResource::collection(Product::where('name', 'like', '%'.$request->keyword.'%')
+        $product = ProductResource::collection(Product::where('name', 'like', '%'.$request->keyword.'%')
             ->orWhere('description', 'like', '%'.$request->keyword.'%')
             ->orderByRaw('name like ? desc', $request->keyword)
             ->get());
+        return response()->json($product);
     }
 
     // add product
@@ -40,7 +42,8 @@ class ProductController extends Controller
     // edit product
     public function edit($id)
     {
-        return new ProductResource(Product::find($id));
+        $product = new ProductResource(Product::find($id));
+        return response()->json($product);
     }
 
     // update product

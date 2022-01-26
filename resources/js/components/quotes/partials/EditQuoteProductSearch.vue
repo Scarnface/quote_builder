@@ -50,7 +50,7 @@ Vue.component('edit-quote-product-search', {
                     this.$axios.get('/sanctum/csrf-cookie').then(response => {
                         this.$axios.get('/api/products/livesearch', { params: { keyword: this.keyword } })
                             .then(response => {
-                                this.products = response.data.data;
+                                this.products = response.data;
                             })
                             .catch(function (error) {
                                 console.error(error);

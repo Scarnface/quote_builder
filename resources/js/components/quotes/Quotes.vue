@@ -49,7 +49,7 @@ export default {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get('/api/quotes')
                 .then(response => {
-                    this.quotes = response.data.data;
+                    this.quotes = response.data;
                 })
                 .catch(function (error) {
                     console.error(error);
