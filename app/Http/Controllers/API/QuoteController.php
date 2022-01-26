@@ -23,6 +23,9 @@ class QuoteController extends Controller
             'last_name' => $request->last_name,
             'email' => $request->email,
             'address' => $request->address,
+            'sub_total' => 0,
+            'vat' => 0,
+            'total' => 0,
         ]);
         $quote->save();
 
