@@ -35,11 +35,7 @@ class QuoteController extends Controller
     // edit quote
     public function edit($id)
     {
-        $quote = Quote::with(['products' => function ($query) {
-        $query->select('products.id', 'name', 'description', 'price');
-        }])->find($id, ['id', 'first_name', 'last_name', 'email', 'address']);
-
-        return response()->json($quote);
+        return new QuoteResource(Quote::find($id));
     }
 
     // update quote
