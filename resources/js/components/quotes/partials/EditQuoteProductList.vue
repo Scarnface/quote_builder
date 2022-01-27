@@ -18,11 +18,11 @@ Vue.component('edit-quote-product-list', {
                     <td>{{ product.name }}</td>
                     <td>{{ product.description }}</td>
                     <td>{{ product.price }}</td>
-                    <td>{{ product.pivot.quantity }}</td>
+                    <td>{{ product.quantity }}</td>
                     <td>
                         <div class="btn-group" role="group">
-                            <button class="btn btn-secondary" :disabled="product.pivot.quantity === 1" @click="product.pivot.quantity--">&nbsp;-&nbsp;</button>
-                            <button class="btn btn-secondary" @click="product.pivot.quantity++">&nbsp;+&nbsp;</button>
+                            <button class="btn btn-secondary" :disabled="product.quantity === 1" @click="product.quantity--">&nbsp;-&nbsp;</button>
+                            <button class="btn btn-secondary" @click="product.quantity++">&nbsp;+&nbsp;</button>
                             <button class="btn btn-danger" @click="this.$emit('deletequoteproduct', product.id)">Delete</button>
                         </div>
                     </td>

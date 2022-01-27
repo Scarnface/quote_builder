@@ -21,7 +21,6 @@
                             <label>Address</label>
                             <input type="text" class="form-control" v-model="quote.address">
                         </div>
-                        <button type="submit" class="btn btn-primary">Update Client Details</button>
                     </form>
                 </div>
             </div>
@@ -67,24 +66,8 @@ export default {
         })
     },
     methods: {
-        saveClientDetails() {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post(`/api/quotes/update/${this.$route.params.id}`, this.quote)
-                    .then(response => {
-                        this.$router.push({name: 'quotes'});
-                    })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
-            })
-        },
         addQuoteProduct(product) {
-            product.pivot = {
-                quote_id: this.quote.id,
-                product_id: product.id,
-                quantity: 1
-            };
-
+            product.quantity = 1;
             let i = this.quote.products.length + 1;
             this.quote.products.splice(i, 0, product);
         },

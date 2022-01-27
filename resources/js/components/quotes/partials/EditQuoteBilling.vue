@@ -22,8 +22,8 @@ Vue.component('edit-quote-billing', {
             subTotal: function () {
                 const resultArray = this.objToArray(this.quote.products);
                 return resultArray.reduce(function (a, c) {
-                    // products.price * products.pivot.quantity
-                    return a + Number((c[3] * c[4][3]) || 0)
+                    // products.price * products.quantity
+                    return a + Number((c[3] * c[4]) || 0)
                 }, 0).toFixed(2);
             },
             vat: function () {

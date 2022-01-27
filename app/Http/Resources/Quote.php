@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Resources\Product as ProductResource;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -24,6 +26,7 @@ class Quote extends JsonResource
             'sub_total' => $this->sub_total,
             'vat' => $this->vat,
             'total' => $this->total,
+            'products' => $this->products,
         ];
     }
 }

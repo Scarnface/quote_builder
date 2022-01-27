@@ -12,4 +12,14 @@ class ProductQuote extends Model
     protected $guarded=[];
 
     protected $table = 'product_quote';
+
+    public function quotes()
+    {
+        return $this->belongsToMany(Quote::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class);
+    }
 }

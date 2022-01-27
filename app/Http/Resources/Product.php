@@ -20,6 +20,9 @@ class Product extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'price' => $this->price,
+            'quantity' => $this->whenPivotLoaded('product_quote', function (){
+                return $this->pivot->quantity;
+            }),
         ];
     }
 }
