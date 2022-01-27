@@ -23199,7 +23199,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.keyword !== '') {
         this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-          _this.$axios.get('/api/products/livesearch', {
+          _this.$axios.get('/api/products/', {
             params: {
               keyword: _this.keyword
             }
@@ -24763,10 +24763,6 @@ var routes = [{
 }, {
   name: 'products',
   path: '/products',
-  component: _components_products_Products__WEBPACK_IMPORTED_MODULE_7__["default"]
-}, {
-  name: 'searchproducts',
-  path: '/products/livesearch',
   component: _components_products_Products__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   name: 'addproduct',

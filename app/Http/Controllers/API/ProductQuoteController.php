@@ -8,14 +8,7 @@ use Illuminate\Http\Request;
 
 class ProductQuoteController extends Controller
 {
-    // all productQuotes
-    public function index()
-    {
-        $productQuote = ProductQuote::all()->toArray();
-        return response()->json($productQuote);
-    }
-
-    // add productQuote
+    // add product to quote
     public function add(Request $request)
     {
         $productQuote = new ProductQuote([
@@ -28,14 +21,7 @@ class ProductQuoteController extends Controller
         return response()->json('The productQuote successfully added');
     }
 
-    // edit productQuote
-    public function edit($id)
-    {
-        $productQuote = ProductQuote::find($id);
-        return response()->json($productQuote);
-    }
-
-    // update productQuote
+    // update product in quote
     public function update($id, Request $request)
     {
         $productQuote = ProductQuote::find($id);
@@ -44,7 +30,7 @@ class ProductQuoteController extends Controller
         return response()->json('The productQuote successfully updated');
     }
 
-    // delete productQuote
+    // delete product from quote
     public function delete($id)
     {
         $productQuote = ProductQuote::find($id);

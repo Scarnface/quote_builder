@@ -15,9 +15,4 @@ class Product extends Model
     {
         return $this->belongsToMany(Quote::class);
     }
-
-    public function productQuote()
-    {
-        return $this->belongsToMany(ProductQuote::class);
-    }
 }

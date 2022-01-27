@@ -54,11 +54,6 @@ export const routes = [
         component: Products
     },
     {
-        name: 'searchproducts',
-        path: '/products/livesearch',
-        component: Products
-    },
-    {
         name: 'addproduct',
         path: '/products/add',
         component: AddProduct

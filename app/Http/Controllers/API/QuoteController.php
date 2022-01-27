@@ -33,7 +33,7 @@ class QuoteController extends Controller
         return response()->json('The quote was successfully added');
     }
 
-    // edit quote
+    // edit quote page
     public function edit($id)
     {
         $quote = new QuoteResource(Quote::with(['products' => function ($query) {

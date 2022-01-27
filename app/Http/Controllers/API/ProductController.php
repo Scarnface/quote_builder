@@ -9,20 +9,18 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // all products
-    public function index()
+    // search or all products
+    public function index(Request $request)
     {
-        $product =  ProductResource::collection(Product::all());
-        return response()->json($product);
-    }
+        if($request->keyword) {
+            $product = ProductResource::collection(Product::where('name', 'like', '%'.$request->keyword.'%')
+                ->orWhere('description', 'like', '%'.$request->keyword.'%')
+                ->orderByRaw('name like ? desc', $request->keyword)
+                ->get());
+        } else {
+            $product =  ProductResource::collection(Product::all());
+        }
 
-    // live search
-    public function liveSearch(Request $request)
-    {
-        $product = ProductResource::collection(Product::where('name', 'like', '%'.$request->keyword.'%')
-            ->orWhere('description', 'like', '%'.$request->keyword.'%')
-            ->orderByRaw('name like ? desc', $request->keyword)
-            ->get());
         return response()->json($product);
     }
 
@@ -39,7 +37,7 @@ class ProductController extends Controller
         return response()->json('The product was successfully added');
     }
 
-    // edit product
+    // edit product page
     public function edit($id)
     {
         $product = new ProductResource(Product::find($id));
