@@ -10,4 +10,6 @@ class ProductQuote extends Model
     use HasFactory;
 
     protected $guarded=[];
+
+    protected $table = 'product_quote';
 }

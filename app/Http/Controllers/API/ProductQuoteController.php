@@ -14,11 +14,9 @@ class ProductQuoteController extends Controller
         $productQuote = new ProductQuote([
             'quote_id' => $request->quote_id,
             'product_id' => $request->product_id,
-            'quantity' => 1,
+            'quantity' => $request->quantity,
         ]);
         $productQuote->save();
-
-        return response()->json('The productQuote successfully added');
     }
 
     // update product in quote
