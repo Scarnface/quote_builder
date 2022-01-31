@@ -19,9 +19,7 @@ Vue.component('edit-quote-product-list', {
                         <td>{{ product.description }}</td>
                         <td>{{ product.price }}</td>
                         <td>
-                            <input type="number" min="1" class="form-control form-control-sm" v-model="product.quantity"
-                                   @blur="this.$emit('updatequantity', product.id, product.quantity)"
-                            >
+                            <input type="number" min="1" class="form-control form-control-sm" v-model="product.quantity">
                         </td>
                         <td>
                             <div class="btn-group" role="group">

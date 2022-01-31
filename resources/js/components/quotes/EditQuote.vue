@@ -40,7 +40,6 @@
     <edit-quote-product-list
         :quote="quote"
         @deletequoteproduct="deleteQuoteProduct"
-        @updatequantity="updateQuantity"
     />
     <button class="btn btn-primary" @click="this.saveQuoteDetails()">Update Quote</button>
 </template>
@@ -66,7 +65,6 @@ export default {
             this.$axios.get(`/api/quotes/edit/${this.$route.params.id}`)
                 .then(response => {
                     this.quote = response.data;
-                    this.loadedQuote = response.data;
                 })
                 .catch(function (error) {
                     console.error(error);
@@ -106,9 +104,6 @@ export default {
             product.quantity = 1;
             let i = this.quote.products.length + 1;
             this.quote.products.splice(i, 0, product);
-        },
-        updateQuantity(id, quantity) {
-
         },
         deleteQuoteProduct(id) {
             let i = this.quote.products.map(item => item.id).indexOf(id);

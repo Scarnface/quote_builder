@@ -22981,7 +22981,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       quote: {
-        products: {}
+        products: {
+          pivot: {}
+        }
       }
     };
   },
