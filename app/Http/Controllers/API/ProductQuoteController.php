@@ -8,24 +8,18 @@ use Illuminate\Http\Request;
 
 class ProductQuoteController extends Controller
 {
-    // add product to quote
-    public function add(Request $request)
+    // add or update product in quote
+    public function updateOrCreate(Request $request)
     {
-        $productQuote = new ProductQuote([
-            'quote_id' => $request->quote_id,
-            'product_id' => $request->product_id,
-            'quantity' => $request->quantity,
-        ]);
-        $productQuote->save();
-    }
-
-    // update product in quote
-    public function update($id, Request $request)
-    {
-        $productQuote = ProductQuote::find($id);
-        $productQuote->update($request->all());
-
-        return response()->json('The productQuote successfully updated');
+        ProductQuote::updateOrCreate(
+            [
+                'quote_id' => $request->quote_id,
+                'product_id' => $request->product_id,
+            ],
+            [
+                'quantity' => $request->quantity,
+            ]
+        );
     }
 
     // delete product from quote
@@ -33,7 +27,5 @@ class ProductQuoteController extends Controller
     {
         $productQuote = ProductQuote::find($id);
         $productQuote->delete();
-
-        return response()->json('The productQuote successfully deleted');
     }
 }

@@ -22963,6 +22963,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _partials_EditQuoteProductList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./partials/EditQuoteProductList */ "./resources/js/components/quotes/partials/EditQuoteProductList.vue");
 /* harmony import */ var _partials_EditQuoteProductSearch__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./partials/EditQuoteProductSearch */ "./resources/js/components/quotes/partials/EditQuoteProductSearch.vue");
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 
@@ -23038,19 +23044,34 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       var _this2 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        // for(let product of this.quote.products) {
-        //     let productQuote = {
-        //         quote_id: this.quote.id,
-        //         product_id: product.id,
-        //         quantity: product.quantity,
-        //     }
-        //
-        //
-        //     this.$axios.post('/api/productQuote/add', productQuote)
-        //         .catch(function (error) {
-        //             console.error(error);
-        //         });
-        // }
+        // Update or create new and existing products in the quote
+        var _iterator = _createForOfIteratorHelper(_this2.quote.products),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var product = _step.value;
+            var productQuote = {
+              quote_id: _this2.quote.id,
+              product_id: product.id,
+              quantity: product.quantity
+            };
+
+            _this2.$axios.post('/api/productQuote/updateOrCreate', productQuote)["catch"](function (error) {
+              console.error(error);
+            });
+          } // Delete any removed products
+          // this.$axios.delete(`/api/productQuote/delete/${id}`)
+          //     .catch(function (error) {
+          //         console.error(error);
+          //     });
+
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+
         _this2.quote.sub_total = _this2.subTotal;
         _this2.quote.vat = _this2.vat;
         _this2.quote.total = _this2.total;

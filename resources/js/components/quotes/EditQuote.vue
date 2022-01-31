@@ -117,19 +117,25 @@ export default {
         saveQuoteDetails() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
 
-                // for(let product of this.quote.products) {
-                //     let productQuote = {
-                //         quote_id: this.quote.id,
-                //         product_id: product.id,
-                //         quantity: product.quantity,
-                //     }
-                //
-                //
-                //     this.$axios.post('/api/productQuote/add', productQuote)
-                //         .catch(function (error) {
-                //             console.error(error);
-                //         });
-                // }
+                // Update or create new and existing products in the quote
+                for(let product of this.quote.products) {
+                    let productQuote = {
+                        quote_id: this.quote.id,
+                        product_id: product.id,
+                        quantity: product.quantity,
+                    }
+
+                    this.$axios.post('/api/productQuote/updateOrCreate', productQuote)
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                }
+
+                // Delete any removed products
+                // this.$axios.delete(`/api/productQuote/delete/${id}`)
+                //     .catch(function (error) {
+                //         console.error(error);
+                //     });
 
                 this.quote.sub_total = this.subTotal;
                 this.quote.vat = this.vat;
