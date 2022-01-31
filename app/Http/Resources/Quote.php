@@ -26,7 +26,7 @@ class Quote extends JsonResource
             'sub_total' => $this->sub_total,
             'vat' => $this->vat,
             'total' => $this->total,
-            'products' => $this->products,
+            'products' => ProductResource::collection($this->products),
         ];
     }
 }

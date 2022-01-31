@@ -22981,9 +22981,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   data: function data() {
     return {
       quote: {
-        products: {
-          pivot: {}
-        }
+        products: {}
       }
     };
   },
@@ -22993,7 +22991,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get("/api/quotes/edit/".concat(_this.$route.params.id)).then(function (response) {
         _this.quote = response.data;
-        _this.loadedQuote = response.data;
       })["catch"](function (error) {
         console.error(error);
       });
@@ -23035,7 +23032,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       var i = this.quote.products.length + 1;
       this.quote.products.splice(i, 0, product);
     },
-    updateQuantity: function updateQuantity(id, quantity) {},
     deleteQuoteProduct: function deleteQuoteProduct(id) {
       var i = this.quote.products.map(function (item) {
         return item.id;
@@ -24058,11 +24054,10 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   /* PROPS */
   , ["onAddquoteproduct"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_list, {
     quote: $data.quote,
-    onDeletequoteproduct: $options.deleteQuoteProduct,
-    onUpdatequantity: $options.updateQuantity
+    onDeletequoteproduct: $options.deleteQuoteProduct
   }, null, 8
   /* PROPS */
-  , ["quote", "onDeletequoteproduct", "onUpdatequantity"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , ["quote", "onDeletequoteproduct"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-primary",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return _this.saveQuoteDetails();
@@ -24208,7 +24203,7 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 /* HOISTED */
 );
 
-var _hoisted_5 = ["onUpdate:modelValue", "onBlur"];
+var _hoisted_5 = ["onUpdate:modelValue"];
 var _hoisted_6 = {
   "class": "btn-group",
   role: "group"
@@ -24232,12 +24227,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       "class": "form-control form-control-sm",
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return product.quantity = $event;
-      },
-      onBlur: function onBlur($event) {
-        return _this.$emit('updatequantity', product.id, product.quantity);
       }
-    }, null, 40
-    /* PROPS, HYDRATE_EVENTS */
+    }, null, 8
+    /* PROPS */
     , _hoisted_5), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, product.quantity]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
