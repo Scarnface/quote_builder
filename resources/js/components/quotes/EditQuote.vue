@@ -155,10 +155,12 @@ export default {
                 }
 
                 // Delete any removed products
-                // this.$axios.delete(`/api/productQuote/delete/${id}`)
-                //     .catch(function (error) {
-                //         console.error(error);
-                //     });
+                for(let product of this.removedProducts) {
+                    this.$axios.delete(`/api/productQuote/delete/${product.pivotID}`)
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                }
 
                 // Assign the totals to the quote data to be saved
                 this.quote.sub_total = this.subTotal;

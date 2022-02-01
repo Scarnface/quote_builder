@@ -22768,10 +22768,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // The specific product to be added
       product: {}
     };
   },
   methods: {
+    // Saves the new product to the DB
     addProduct: function addProduct() {
       var _this = this;
 
@@ -22811,9 +22813,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // The specific product requested
       product: {}
     };
   },
+  // Loads the product data from the DB and assigns it to the local data variable
   created: function created() {
     var _this = this;
 
@@ -22826,6 +22830,7 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    // Updates the DB with local data
     updateProduct: function updateProduct() {
       var _this2 = this;
 
@@ -22921,10 +22926,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // The specific quote to be added
       quote: {}
     };
   },
   methods: {
+    // Saves the new quote to the DB
     addQuote: function addQuote() {
       var _this = this;
 
@@ -23068,6 +23075,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
       this.removedProducts.push(product);
     },
+    // Updates the DB with all local data
     saveQuoteDetails: function saveQuoteDetails() {
       var _this2 = this;
 
@@ -23090,16 +23098,29 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
               console.error(error);
             });
           } // Delete any removed products
-          // this.$axios.delete(`/api/productQuote/delete/${id}`)
-          //     .catch(function (error) {
-          //         console.error(error);
-          //     });
-          // Assign the totals to the quote data to be saved
 
         } catch (err) {
           _iterator.e(err);
         } finally {
           _iterator.f();
+        }
+
+        var _iterator2 = _createForOfIteratorHelper(_this2.removedProducts),
+            _step2;
+
+        try {
+          for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+            var _product = _step2.value;
+
+            _this2.$axios["delete"]("/api/productQuote/delete/".concat(_product.pivotID))["catch"](function (error) {
+              console.error(error);
+            });
+          } // Assign the totals to the quote data to be saved
+
+        } catch (err) {
+          _iterator2.e(err);
+        } finally {
+          _iterator2.f();
         }
 
         _this2.quote.sub_total = _this2.subTotal;
@@ -23218,16 +23239,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // The live search keyword
       keyword: null,
+      // The live search products
       products: {}
     };
   },
   watch: {
+    // Triggers search whenever users add characters to the keyword
     keyword: function keyword(after, before) {
       this.liveSearch();
     }
   },
   methods: {
+    // Searches for products by keyword
     liveSearch: function liveSearch() {
       var _this = this;
 
@@ -23242,7 +23267,7 @@ __webpack_require__.r(__webpack_exports__);
           })["catch"](function (error) {
             console.error(error);
           });
-        });
+        }); // Removes search table by resetting variable if user deletes keyword from search
       } else {
         this.products = {};
       }
