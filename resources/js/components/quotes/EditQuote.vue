@@ -58,6 +58,7 @@ export default {
             quote: {
                 products: {}
             },
+            removedProducts: [],
         }
     },
     created() {
@@ -104,10 +105,15 @@ export default {
             product.quantity = 1;
             let i = this.quote.products.length + 1;
             this.quote.products.splice(i, 0, product);
+            if(this.removedProducts.includes(product.id)) {
+                let j = this.removedProducts.indexOf(product.id)
+                this.removedProducts.splice(j, 1);
+            }
         },
         deleteQuoteProduct(id) {
             let i = this.quote.products.map(item => item.id).indexOf(id);
             this.quote.products.splice(i, 1);
+            this.removedProducts.push(id)
         },
         saveQuoteDetails() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {

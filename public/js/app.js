@@ -22982,7 +22982,8 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     return {
       quote: {
         products: {}
-      }
+      },
+      removedProducts: []
     };
   },
   created: function created() {
@@ -23031,12 +23032,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       product.quantity = 1;
       var i = this.quote.products.length + 1;
       this.quote.products.splice(i, 0, product);
+
+      if (this.removedProducts.includes(product.id)) {
+        var j = this.removedProducts.indexOf(product.id);
+        this.removedProducts.splice(j, 1);
+      }
     },
     deleteQuoteProduct: function deleteQuoteProduct(id) {
       var i = this.quote.products.map(function (item) {
         return item.id;
       }).indexOf(id);
       this.quote.products.splice(i, 1);
+      this.removedProducts.push(id);
     },
     saveQuoteDetails: function saveQuoteDetails() {
       var _this2 = this;
