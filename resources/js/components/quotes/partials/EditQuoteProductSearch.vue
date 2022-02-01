@@ -1,32 +1,39 @@
 Vue.component('edit-quote-product-search', {
     <template>
         <div>
-            <h4 class="text-center">Search For Product</h4><br/>
+            <div class="border border-3 rounded my-4 p-4">
+                <div class="d-flex justify-content-around">
+                    <h4 class="text-info text-center mb-0">Add Product</h4>
 
-            <div>
-                <input type="text" v-model="keyword">
-                <table v-if="keyword" class="table table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr v-for="product in products" :key="product.id">
-                        <td>{{ product.name }}</td>
-                        <td>{{ product.description }}</td>
-                        <td>{{ product.price }}</td>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-primary" @click="this.$emit('addquoteproduct', product)">Add</button>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                    <div class="col-sm-6">
+                        <input class="form-control text-center" type="text" placeholder="Search..." v-model="keyword">
+                    </div>
+                </div>
+
+                <div>
+                    <table v-if="keyword" class="table table-bordered table-sm">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr v-for="product in products" :key="product.id">
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.description }}</td>
+                            <td>{{ product.price }}</td>
+                            <td>
+                                <div class="d-flex justify-content-center btn-group" role="group">
+                                    <button class="btn btn-primary btn-sm" @click="this.$emit('addquoteproduct', product)">Add</button>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </template>

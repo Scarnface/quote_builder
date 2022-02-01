@@ -1,7 +1,7 @@
 Vue.component('edit-quote-product-list', {
     <template>
-        <div>
-            <h4 class="text-center">Products Included In Quote</h4><br/>
+        <div class="border border-3 rounded my-4 p-4">
+            <h4 class="text-info text-center">Products Included In Quote</h4><br/>
 
             <table class="table table-bordered table-sm">
                 <thead>
@@ -22,8 +22,8 @@ Vue.component('edit-quote-product-list', {
                             <input type="number" min="1" class="form-control form-control-sm" v-model="product.quantity">
                         </td>
                         <td>
-                            <div class="btn-group" role="group">
-                                <button class="btn btn-danger" @click="this.$emit('deletequoteproduct', product)">Delete</button>
+                            <div class="d-flex justify-content-center btn-group" role="group">
+                                <button class="btn btn-danger btn-sm" @click="this.$emit('deletequoteproduct', product)">Delete</button>
                             </div>
                         </td>
                     </tr>

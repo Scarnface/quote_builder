@@ -2,6 +2,10 @@
     <div>
         <h4 class="text-center">All Products</h4><br/>
 
+        <button type="button" class="btn btn-info" style="margin-bottom: 1rem" @click="this.$router.push('/products/add')">Add Product</button><br/>
+
+        <input style="margin-bottom: 1rem" type="text" placeholder="Search..." v-model="keyword">
+
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -26,15 +30,16 @@
             </tbody>
         </table>
     </div>
-
-    <button type="button" class="btn btn-info" style="margin-top: 1rem" @click="this.$router.push('/products/add')">Add Product</button>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            products: []
+            // The live search keyword
+            keyword: null,
+            // The live search products
+            products: {}
         }
     },
     created() {
@@ -48,7 +53,38 @@ export default {
                 });
         })
     },
+    watch: {
+        // Triggers search whenever users add characters to the keyword
+        keyword(after, before) {
+            this.liveSearch();
+        }
+    },
     methods: {
+        // Searches for products by keyword
+        liveSearch() {
+            if(this.keyword !== '') {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.get('/api/products/', { params: { keyword: this.keyword } })
+                        .then(response => {
+                            this.products = response.data;
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                })
+                // Removes search table by resetting variable if user deletes keyword from search
+            } else {
+                this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                    this.$axios.get('/api/products')
+                        .then(response => {
+                            this.products = response.data;
+                        })
+                        .catch(function (error) {
+                            console.error(error);
+                        });
+                })
+            }
+        },
         deleteProduct(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.delete(`/api/products/delete/${id}`)

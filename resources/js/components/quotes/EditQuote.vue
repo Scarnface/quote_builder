@@ -1,38 +1,40 @@
 <template>
-    <div class="d-flex">
-        <div class="w-75">
-            <h4 class="text-center">Edit Client Details</h4>
-            <div class="row">
-                <div class="col-md-6">
-                    <form>
-                        <div class="form-group">
-                            <label>First Name</label>
-                            <input type="text" class="form-control" v-model="quote.first_name">
-                        </div>
-                        <div class="form-group">
-                            <label>Last Name</label>
-                            <input type="text" class="form-control" v-model="quote.last_name">
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="text" class="form-control" v-model="quote.email">
-                        </div>
-                        <div class="form-group">
-                            <label>Address</label>
-                            <input type="text" class="form-control" v-model="quote.address">
-                        </div>
-                    </form>
+    <div class="d-flex justify-content-between">
+        <div class="border border-3 rounded p-4" style="width: 66%">
+            <h4 class="text-info text-center">Edit Client Details</h4>
+
+            <form>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="fname">First Name</label>
+                    <div class="col-sm-10">
+                        <input id="fname" type="text" class="form-control" v-model="quote.first_name">
+                    </div>
                 </div>
-            </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="lname">Last Name</label>
+                    <div class="col-sm-10">
+                        <input id="lname" type="text" class="form-control" v-model="quote.last_name">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="email">Email</label>
+                    <div class="col-sm-10">
+                        <input id="email" type="text" class="form-control" v-model="quote.email">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="address">Address</label>
+                    <div class="col-sm-10">
+                        <input id="address" type="text" class="form-control" v-model="quote.address">
+                    </div>
+                </div>
+            </form>
         </div>
-        <div>
-            <h4>Billing</h4>
-            <h5>Sub Total</h5>
-            <h5>£{{ subTotal }}</h5>
-            <h5>VAT</h5>
-            <h5>£{{ vat }}</h5>
-            <h5>Total</h5>
-            <h5>£{{ total }}</h5>
+        <div class="border border-3 rounded p-4" style="width: 30%">
+            <h4 class="text-info text-center mb-4">Billing</h4><br>
+            <h5 class="text-center mb-3">Sub Total: £{{ subTotal }}</h5>
+            <h5 class="text-center mb-3">VAT: £{{ vat }}</h5>
+            <h5 class="text-center mb-3">Total: £{{ total }}</h5>
         </div>
     </div>
     <edit-quote-product-search
@@ -41,7 +43,7 @@
         :quote="quote"
         @deletequoteproduct="deleteQuoteProduct"
     />
-    <button class="btn btn-primary" @click="this.saveQuoteDetails()">Update Quote</button>
+    <button class="btn btn-primary mb-4" @click="this.saveQuoteDetails()">Update Quote</button>
 </template>
 
 <script>
