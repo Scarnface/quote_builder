@@ -31,10 +31,12 @@
 export default {
     data() {
         return {
+            // The specific quote to be added
             quote: {}
         }
     },
     methods: {
+        // Saves the new quote to the DB
         addQuote() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/quotes/add', this.quote)

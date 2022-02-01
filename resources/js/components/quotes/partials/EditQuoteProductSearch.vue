@@ -35,16 +35,20 @@ Vue.component('edit-quote-product-search', {
     export default {
         data() {
             return {
+                // The live search keyword
                 keyword: null,
+                // The live search products
                 products: {}
             }
         },
         watch: {
+            // Triggers search whenever users add characters to the keyword
             keyword(after, before) {
                 this.liveSearch();
             }
         },
         methods: {
+            // Searches for products by keyword
             liveSearch() {
                 if(this.keyword !== '') {
                     this.$axios.get('/sanctum/csrf-cookie').then(response => {
@@ -56,6 +60,7 @@ Vue.component('edit-quote-product-search', {
                                 console.error(error);
                             });
                     })
+                    // Removes search table by resetting variable if user deletes keyword from search
                 } else {
                     this.products = {};
                 }

@@ -27,9 +27,11 @@
 export default {
     data() {
         return {
+            // The specific product requested
             product: {}
         }
     },
+    // Loads the product data from the DB and assigns it to the local data variable
     created() {
         this.$axios.get('/sanctum/csrf-cookie').then(response => {
             this.$axios.get(`/api/products/edit/${this.$route.params.id}`)
@@ -42,6 +44,7 @@ export default {
         })
     },
     methods: {
+        // Updates the DB with local data
         updateProduct() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post(`/api/products/update/${this.$route.params.id}`, this.product)

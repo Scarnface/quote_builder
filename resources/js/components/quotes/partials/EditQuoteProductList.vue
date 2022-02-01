@@ -23,7 +23,7 @@ Vue.component('edit-quote-product-list', {
                         </td>
                         <td>
                             <div class="btn-group" role="group">
-                                <button class="btn btn-danger" @click="this.$emit('deletequoteproduct', product.id)">Delete</button>
+                                <button class="btn btn-danger" @click="this.$emit('deletequoteproduct', product)">Delete</button>
                             </div>
                         </td>
                     </tr>

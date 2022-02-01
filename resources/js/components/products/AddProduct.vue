@@ -27,10 +27,12 @@
 export default {
     data() {
         return {
+            // The specific product to be added
             product: {}
         }
     },
     methods: {
+        // Saves the new product to the DB
         addProduct() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/products/add', this.product)

@@ -22980,15 +22980,18 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
   },
   data: function data() {
     return {
+      // The quote data with all its products
       quote: {
         products: {}
       },
+      // An array to track products removed from live data but not the DB
       removedProducts: []
     };
   },
   created: function created() {
     var _this = this;
 
+    // Loads the quote data from the DB and assigns it to the local data variable
     this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
       _this.$axios.get("/api/quotes/edit/".concat(_this.$route.params.id)).then(function (response) {
         _this.quote = response.data;
@@ -22998,21 +23001,25 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     });
   },
   computed: {
+    // Calls the objToArray method to allow math functions
     subTotal: function subTotal() {
-      var resultArray = this.objToArray(this.quote.products);
+      var resultArray = this.objToArray(this.quote.products); // Multiplies products.price * products.quantity and returns rounded to 2 D.P.
+
       return resultArray.reduce(function (a, c) {
-        // products.price * products.quantity
         return a + Number(c[3] * c[4] || 0);
       }, 0).toFixed(2);
     },
     vat: function vat() {
+      // Multiply subtotal by 20% for VAT
       return Number(this.subTotal * 0.2).toFixed(2);
     },
     total: function total() {
+      // Adds VAT to subtotal and returns total
       return (Number(this.subTotal) + Number(this.vat)).toFixed(2);
     }
   },
   methods: {
+    // Converts JSON to arrays
     objToArray: function objToArray(obj) {
       var result = [];
 
@@ -23029,33 +23036,50 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       return result;
     },
     addQuoteProduct: function addQuoteProduct(product) {
-      product.quantity = 1;
-      var i = this.quote.products.length + 1;
-      this.quote.products.splice(i, 0, product);
+      // Tests if the product is already in the quote
+      if (this.quote.products.findIndex(function (x) {
+        return x.id === product.id;
+      }) === -1) {
+        // If false, set quantity to 1 and add it
+        product.quantity = 1;
+        var i = this.quote.products.length + 1;
+        this.quote.products.splice(i, 0, product);
+      } else {
+        // If true, alert the user
+        alert("Product already added to quote");
+        return;
+      } // Tests if the product being added has previously been removed from the live data
 
-      if (this.removedProducts.includes(product.id)) {
-        var j = this.removedProducts.indexOf(product.id);
+
+      if (this.removedProducts.findIndex(function (x) {
+        return x.id === product.id;
+      }) !== -1) {
+        // If true, remove from the removedProducts array to prevent deletion during save
+        var j = this.removedProducts.indexOf(product);
         this.removedProducts.splice(j, 1);
       }
     },
-    deleteQuoteProduct: function deleteQuoteProduct(id) {
+    deleteQuoteProduct: function deleteQuoteProduct(product) {
+      // Remove the product from the live data
       var i = this.quote.products.map(function (item) {
         return item.id;
-      }).indexOf(id);
-      this.quote.products.splice(i, 1);
-      this.removedProducts.push(id);
+      }).indexOf(product.id);
+      this.quote.products.splice(i, 1); // Record its removal in the removedProducts array
+
+      this.removedProducts.push(product);
     },
     saveQuoteDetails: function saveQuoteDetails() {
       var _this2 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        // Update or create new and existing products in the quote
+        // Loop all products in live data and create or update existing products in the quote via the pivot table
         var _iterator = _createForOfIteratorHelper(_this2.quote.products),
             _step;
 
         try {
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var product = _step.value;
+            // Construct the pivot entry
             var productQuote = {
               quote_id: _this2.quote.id,
               product_id: product.id,
@@ -23070,6 +23094,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
           //     .catch(function (error) {
           //         console.error(error);
           //     });
+          // Assign the totals to the quote data to be saved
 
         } catch (err) {
           _iterator.e(err);
@@ -23079,7 +23104,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 
         _this2.quote.sub_total = _this2.subTotal;
         _this2.quote.vat = _this2.vat;
-        _this2.quote.total = _this2.total;
+        _this2.quote.total = _this2.total; // Save customer details and totals
 
         _this2.$axios.post("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
           _this2.$router.push({
@@ -24240,7 +24265,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_5), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, product.quantity]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger",
       onClick: function onClick($event) {
-        return _this.$emit('deletequoteproduct', product.id);
+        return _this.$emit('deletequoteproduct', product);
       }
     }, "Delete", 8
     /* PROPS */
