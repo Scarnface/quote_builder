@@ -1,7 +1,7 @@
 <template>
     <div class="container">
-        <div class="text-center" style="margin: 20px 0px 20px 0px;">
-            <img src="https://i.postimg.cc/x8dYJ0Kg/Quote-Builder.png" alt="Quote Builder Logo"><br>
+        <div class="d-flex justify-content-center" style="margin: 1rem 0 1rem 0;">
+            <img class="w-50" style="height: 5rem; object-fit: cover;" src="/images/logo/vector/default.svg" alt="Quote Builder Logo"><br>
         </div>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">

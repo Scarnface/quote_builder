@@ -2,8 +2,6 @@
     <div>
         <h4 class="text-center">All Quotes</h4><br/>
 
-        <button type="button" class="btn btn-info" @click="this.$router.push('/quotes/add')">Add Quote</button>
-
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -36,6 +34,8 @@
             </tbody>
         </table>
     </div>
+
+    <button type="button" class="btn btn-info" style="margin-top: 1rem" @click="this.$router.push('/quotes/add')">Add Quote</button>
 </template>
 
 <script>

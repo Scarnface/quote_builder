@@ -2,8 +2,6 @@
     <div>
         <h4 class="text-center">All Products</h4><br/>
 
-        <button type="button" class="btn btn-info" @click="this.$router.push('/products/add')">Add Product</button>
-
         <table class="table table-bordered">
             <thead>
             <tr>
@@ -28,6 +26,8 @@
             </tbody>
         </table>
     </div>
+
+    <button type="button" class="btn btn-info" style="margin-top: 1rem" @click="this.$router.push('/products/add')">Add Product</button>
 </template>
 
 <script>
