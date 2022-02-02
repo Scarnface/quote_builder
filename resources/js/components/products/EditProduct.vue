@@ -54,7 +54,7 @@ export default {
         // Updates the DB with local data
         updateProduct() {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.post(`/api/products/update/${this.$route.params.id}`, this.product)
+                this.$axios.put(`/api/products/update/${this.$route.params.id}`, this.product)
                     .then(response => {
                         this.$router.push({name: 'products'});
                     })

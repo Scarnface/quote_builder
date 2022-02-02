@@ -14,7 +14,7 @@ Route::group(['prefix' => 'quotes', 'middleware' => 'auth:sanctum'], function ()
     Route::get('/', [QuoteController::class, 'index']);
     Route::post('add', [QuoteController::class, 'add']);
     Route::get('edit/{id}', [QuoteController::class, 'edit']);
-    Route::post('update/{id}', [QuoteController::class, 'update']);
+    Route::put('update/{id}', [QuoteController::class, 'update']);
     Route::delete('delete/{id}', [QuoteController::class, 'delete']);
 });
 
@@ -22,7 +22,7 @@ Route::group(['prefix' => 'products', 'middleware' => 'auth:sanctum'], function 
     Route::get('/', [ProductController::class, 'index']);
     Route::post('add', [ProductController::class, 'add']);
     Route::get('edit/{id}', [ProductController::class, 'edit']);
-    Route::post('update/{id}', [ProductController::class, 'update']);
+    Route::put('update/{id}', [ProductController::class, 'update']);
     Route::delete('delete/{id}', [ProductController::class, 'delete']);
 });
 

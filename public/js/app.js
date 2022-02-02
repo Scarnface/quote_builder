@@ -22835,7 +22835,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this2.$axios.post("/api/products/update/".concat(_this2.$route.params.id), _this2.product).then(function (response) {
+        _this2.$axios.put("/api/products/update/".concat(_this2.$route.params.id), _this2.product).then(function (response) {
           _this2.$router.push({
             name: 'products'
           });
@@ -23162,7 +23162,7 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
         _this2.quote.vat = _this2.vat;
         _this2.quote.total = _this2.total; // Save customer details and totals
 
-        _this2.$axios.post("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
+        _this2.$axios.put("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
           _this2.$router.push({
             name: 'quotes'
           });

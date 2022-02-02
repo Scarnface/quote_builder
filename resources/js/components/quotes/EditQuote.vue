@@ -182,7 +182,7 @@ export default {
                 this.quote.total = this.total;
 
                 // Save customer details and totals
-                this.$axios.post(`/api/quotes/update/${this.$route.params.id}`, this.quote)
+                this.$axios.put(`/api/quotes/update/${this.$route.params.id}`, this.quote)
                     .then(response => {
                         this.$router.push({name: 'quotes'});
                     })
