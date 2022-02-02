@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Product as ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Http\Requests\ProductRequest;
 
 class ProductController extends Controller
 {
@@ -25,14 +26,17 @@ class ProductController extends Controller
     }
 
     // add product
-    public function add(Request $request)
+    public function add(ProductRequest $request)
     {
-        $product = new Product([
-            'name' => $request->name,
-            'description' => $request->description,
-            'price' => $request->price,
-        ]);
-        $product->save();
+        dd($request);
+//        $validatedData = $request->validated();
+//        Product::create($validatedData);
+//        $product = new Product([
+//            'name' => $request->name,
+//            'description' => $request->description,
+//            'price' => $request->price,
+//        ]);
+//        $product->save();
 
         return response()->json('The product was successfully added');
     }
