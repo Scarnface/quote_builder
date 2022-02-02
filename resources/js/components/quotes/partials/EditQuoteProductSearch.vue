@@ -1,16 +1,15 @@
 Vue.component('edit-quote-product-search', {
     <template>
-        <div>
-            <div class="border border-3 rounded my-4 p-4">
-                <div class="d-flex justify-content-around">
-                    <h4 class="text-info text-center mb-0">Add Product</h4>
+        <div class="my-4">
+            <div class="card card-default">
+                <div class="card-header d-flex justify-content-around align-items-center">
+                    <h4 class="brandText mb-0">Search For Additional Products</h4>
 
                     <div class="col-sm-6">
-                        <input class="form-control text-center" type="text" placeholder="Search..." v-model="keyword">
+                        <input class="form-control brandTextField text-center" type="text" placeholder="Search..." v-model="keyword">
                     </div>
                 </div>
-
-                <div>
+                <div class="card-body">
                     <table v-if="keyword" class="table table-bordered table-sm">
                         <thead>
                         <tr>
@@ -27,7 +26,7 @@ Vue.component('edit-quote-product-search', {
                             <td>{{ product.price }}</td>
                             <td>
                                 <div class="d-flex justify-content-center btn-group" role="group">
-                                    <button class="btn btn-primary btn-sm" @click="this.$emit('addquoteproduct', product)">Add</button>
+                                    <button class="btn btn-success btn-sm" @click="this.$emit('addquoteproduct', product)">Add</button>
                                 </div>
                             </td>
                         </tr>

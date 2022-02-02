@@ -11286,3 +11286,19 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+.brandButton {
+  color: #fff;
+  background-color: #056086;
+}
+.brandButton:hover {
+  background-color: #0799b2;
+}
+
+.brandText {
+  color: #056086;
+}
+
+.brandTextField:focus {
+  outline: none !important;
+  box-shadow: 0 0 10px #056086;
+}

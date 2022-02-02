@@ -1,40 +1,51 @@
 <template>
     <div class="d-flex justify-content-between">
-        <div class="border border-3 rounded p-4" style="width: 66%">
-            <h4 class="text-info text-center">Edit Client Details</h4>
-
-            <form>
-                <div class="row mb-3">
-                    <label class="col-sm-2" for="fname">First Name</label>
-                    <div class="col-sm-10">
-                        <input id="fname" type="text" class="form-control" v-model="quote.first_name">
+        <div class="card card-default" style="width: 66%">
+            <div class="card-header">
+                <h4 class="brandText mb-0">Edit Client Details</h4>
+            </div>
+            <div class="card-body">
+                <form>
+                    <div class="row mb-3">
+                        <label class="col-sm-2" for="fname">First Name</label>
+                        <div class="col-sm-10">
+                            <input id="fname" type="text" class="form-control brandTextField" v-model="quote.first_name">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2" for="lname">Last Name</label>
-                    <div class="col-sm-10">
-                        <input id="lname" type="text" class="form-control" v-model="quote.last_name">
+                    <div class="row mb-3">
+                        <label class="col-sm-2" for="lname">Last Name</label>
+                        <div class="col-sm-10">
+                            <input id="lname" type="text" class="form-control brandTextField" v-model="quote.last_name">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2" for="email">Email</label>
-                    <div class="col-sm-10">
-                        <input id="email" type="text" class="form-control" v-model="quote.email">
+                    <div class="row mb-3">
+                        <label class="col-sm-2" for="email">Email</label>
+                        <div class="col-sm-10">
+                            <input id="email" type="text" class="form-control brandTextField" v-model="quote.email">
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <label class="col-sm-2" for="address">Address</label>
-                    <div class="col-sm-10">
-                        <input id="address" type="text" class="form-control" v-model="quote.address">
+                    <div class="row mb-3">
+                        <label class="col-sm-2" for="address">Address</label>
+                        <div class="col-sm-10">
+                            <input id="address" type="text" class="form-control brandTextField" v-model="quote.address">
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
-        <div class="border border-3 rounded p-4" style="width: 30%">
-            <h4 class="text-info text-center mb-4">Billing</h4><br>
-            <h5 class="text-center mb-3">Sub Total: £{{ subTotal }}</h5>
-            <h5 class="text-center mb-3">VAT: £{{ vat }}</h5>
-            <h5 class="text-center mb-3">Total: £{{ total }}</h5>
+
+
+        <div class="card card-default" style="width: 30%">
+            <div class="card-header d-flex align-items-center h-20">
+                <h4 class="brandText text-center mb-0">Billing</h4><br>
+            </div>
+            <div class="card-body d-flex align-items-center justify-content-center">
+                <div>
+                    <h5 class="text-center">Sub Total: £{{ subTotal }}</h5>
+                    <h5 class="text-center mt-3">VAT: £{{ vat }}</h5>
+                    <h5 class="text-center mt-3">Total: £{{ total }}</h5>
+                </div>
+            </div>
         </div>
     </div>
     <edit-quote-product-search
@@ -43,7 +54,7 @@
         :quote="quote"
         @deletequoteproduct="deleteQuoteProduct"
     />
-    <button class="btn btn-primary mb-4" @click="this.saveQuoteDetails()">Update Quote</button>
+    <button class="btn brandButton my-4" @click="this.saveQuoteDetails()">Update Quote</button>
 </template>
 
 <script>
