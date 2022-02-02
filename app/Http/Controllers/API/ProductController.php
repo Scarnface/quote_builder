@@ -28,15 +28,7 @@ class ProductController extends Controller
     // add product
     public function add(ProductRequest $request)
     {
-        dd($request);
-//        $validatedData = $request->validated();
-//        Product::create($validatedData);
-//        $product = new Product([
-//            'name' => $request->name,
-//            'description' => $request->description,
-//            'price' => $request->price,
-//        ]);
-//        $product->save();
+        Product::create($request->validated());
 
         return response()->json('The product was successfully added');
     }
@@ -49,10 +41,9 @@ class ProductController extends Controller
     }
 
     // update product
-    public function update($id, Request $request)
+    public function update(ProductRequest $request, $id)
     {
-        $product = Product::find($id);
-        $product->update($request->all());
+        Product::find($id)->update($request->validated());
 
         return response()->json('The product was successfully updated');
     }

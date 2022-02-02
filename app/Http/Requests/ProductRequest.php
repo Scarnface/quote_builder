@@ -21,16 +21,16 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:255|unique:products',
             'description' => 'required|max:255',
-            'price' => 'required|max:255',
+            'price' => 'required|numeric|max:255',
         ];
     }
 
     protected function update()
     {
         return [
-            'name' => 'required|max:255|unique:products' .$this->route()->product->name,
+            'name' => 'required|max:255|unique:products,name,' .$this->route('id'),
             'description' => 'required|max:255',
-            'price' => 'required|max:255',
+            'price' => 'required|numeric|max:255',
         ];
     }
 }
