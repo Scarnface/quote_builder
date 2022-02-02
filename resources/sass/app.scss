@@ -19,6 +19,13 @@
     color: #056086;
 }
 
+a {
+    text-decoration: none;
+    &:hover {
+        color: #0799b2;
+    }
+}
+
 .brandTextField {
     &:focus {
         outline: none !important;

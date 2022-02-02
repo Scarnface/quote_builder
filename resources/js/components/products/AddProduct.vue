@@ -1,26 +1,33 @@
 <template>
-    <div>
-        <h4 class="text-center">Add Product</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <form @submit.prevent="addProduct">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" v-model="product.name">
+    <div class="card card-default">
+        <div class="card-header">
+            <h4 class="brandText mb-0">Create New Product</h4>
+        </div>
+        <div class="card-body">
+            <form @submit.prevent="addProduct">
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="apname">Name</label>
+                    <div class="col-sm-10">
+                        <input id="apname" type="text" class="form-control brandTextField" v-model="product.name">
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" v-model="product.description">
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="apdescription">Description</label>
+                    <div class="col-sm-10">
+                        <input id="apdescription" type="text" class="form-control brandTextField" v-model="product.description">
                     </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="text" class="form-control" v-model="product.price">
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="apprice">Price</label>
+                    <div class="col-sm-10">
+                        <input id="apprice" type="text" class="form-control brandTextField" v-model="product.price">
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Product</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" class="btn brandButton mt-3">Create Product</button>
+            </form>
         </div>
     </div>
+    <router-link :to="{name: 'products'}" class="text-xl fw-bold brandText">&#60;&#60;&#60; Go Back</router-link>
 </template>
 
 <script>

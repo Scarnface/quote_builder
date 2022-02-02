@@ -11298,6 +11298,13 @@ textarea.form-control-lg {
   color: #056086;
 }
 
+a {
+  text-decoration: none;
+}
+a:hover {
+  color: #0799b2;
+}
+
 .brandTextField:focus {
   outline: none !important;
   box-shadow: 0 0 10px #056086;

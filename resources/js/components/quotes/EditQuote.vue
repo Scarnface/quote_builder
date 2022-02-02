@@ -54,7 +54,8 @@
         :quote="quote"
         @deletequoteproduct="deleteQuoteProduct"
     />
-    <button class="btn brandButton my-4" @click="this.saveQuoteDetails()">Update Quote</button>
+    <button class="btn brandButton my-4" @click="this.saveQuoteDetails()">Update Quote</button><br>
+    <router-link :to="{name: 'quotes'}" class="text-xl fw-bold brandText">&#60;&#60;&#60; Go Back</router-link>
 </template>
 
 <script>

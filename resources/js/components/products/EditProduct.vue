@@ -1,26 +1,33 @@
 <template>
-    <div>
-        <h4 class="text-center">Edit Product</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <form @submit.prevent="updateProduct">
-                    <div class="form-group">
-                        <label>Name</label>
-                        <input type="text" class="form-control" v-model="product.name">
+    <div class="card card-default">
+        <div class="card-header">
+            <h4 class="brandText mb-0">Edit Product</h4>
+        </div>
+        <div class="card-body">
+            <form @submit.prevent="updateProduct">
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="epname">Name</label>
+                    <div class="col-sm-10">
+                        <input id="epname" type="text" class="form-control brandTextField" v-model="product.name">
                     </div>
-                    <div class="form-group">
-                        <label>Description</label>
-                        <input type="text" class="form-control" v-model="product.description">
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="epdescription">Description</label>
+                    <div class="col-sm-10">
+                        <input id="epdescription" type="text" class="form-control brandTextField" v-model="product.description">
                     </div>
-                    <div class="form-group">
-                        <label>Price</label>
-                        <input type="text" class="form-control" v-model="product.price">
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2" for="epprice">Price</label>
+                    <div class="col-sm-10">
+                        <input id="epprice" type="text" class="form-control brandTextField" v-model="product.price">
                     </div>
-                    <button type="submit" class="btn btn-primary">Update Product</button>
-                </form>
-            </div>
+                </div>
+                <button type="submit" class="btn brandButton mt-3">Update Product</button>
+            </form>
         </div>
     </div>
+    <router-link :to="{name: 'products'}" class="text-xl fw-bold brandText">&#60;&#60;&#60; Go Back</router-link>
 </template>
 
 <script>

@@ -1,41 +1,43 @@
 <template>
-    <div>
-        <h4 class="text-center">All Quotes</h4><br/>
-
-        <button type="button" class="btn btn-info" style="margin-bottom: 1rem" @click="this.$router.push('/quotes/add')">Add Quote</button>
-
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>Email</th>
-                <th>Address</th>
-                <th>Sub Total</th>
-                <th>Vat</th>
-                <th>Total</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="quote in quotes" :key="quote.id">
-                <td>{{ quote.first_name }}</td>
-                <td>{{ quote.last_name }}</td>
-                <td>{{ quote.email }}</td>
-                <td>{{ quote.address }}</td>
-                <td>{{ quote.sub_total }}</td>
-                <td>{{ quote.vat }}</td>
-                <td>{{ quote.total }}</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn btn-primary">Edit</router-link>
-                        <button class="btn btn-danger" @click="deleteQuote(quote.id)">Delete</button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="card card-default">
+        <div class="card-header">
+            <h4 class="brandText mb-0">All Quotes</h4>
+        </div>
+        <div class="card-body">
+            <button type="button" class="btn brandButton mb-3" @click="this.$router.push('/quotes/add')">Create New Quote</button>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Address</th>
+                        <th>Sub Total</th>
+                        <th>Vat</th>
+                        <th>Total</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="quote in quotes" :key="quote.id">
+                        <td>{{ quote.first_name }}</td>
+                        <td>{{ quote.last_name }}</td>
+                        <td>{{ quote.email }}</td>
+                        <td>{{ quote.address }}</td>
+                        <td>{{ quote.sub_total }}</td>
+                        <td>{{ quote.vat }}</td>
+                        <td>{{ quote.total }}</td>
+                        <td class="d-flex justify-content-around">
+                            <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn brandButton btn-sm">Edit</router-link>
+                            <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn brandButton btn-sm">Email Quote</router-link>
+                            <button class="btn btn-danger btn-sm" @click="deleteQuote(quote.id)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
+    <router-link :to="{name: 'dashboard'}" class="text-xl fw-bold brandText">&#60;&#60;&#60; Go Back</router-link>
 </template>
 
 <script>

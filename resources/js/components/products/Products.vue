@@ -1,35 +1,40 @@
 <template>
-    <div>
-        <h4 class="text-center">All Products</h4><br/>
-
-        <button type="button" class="btn btn-info" style="margin-bottom: 1rem" @click="this.$router.push('/products/add')">Add Product</button><br/>
-
-        <input style="margin-bottom: 1rem" type="text" placeholder="Search..." v-model="keyword">
-
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="product in products">
-                <td>{{ product.name }}</td>
-                <td>{{ product.description }}</td>
-                <td>{{ product.price }}</td>
-                <td>
-                    <div class="btn-group" role="group">
-                        <router-link :to="{name: 'editproduct', params: { id: product.id }}" class="btn btn-primary">Edit</router-link>
-                        <button class="btn btn-danger" @click="deleteProduct(product.id)">Delete</button>
-                    </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+    <div class="card card-default">
+        <div class="card-header">
+            <h4 class="brandText mb-0">All Products</h4>
+        </div>
+         <div class="card-body">
+             <div class="d-flex justify-content-around align-items-center mb-3">
+                 <button type="button" class="btn brandButton" @click="this.$router.push('/products/add')">Create New Product</button>
+                 <div class="col-sm-6">
+                     <input class="form-control brandTextField text-center" type="text" placeholder="Search existing products..." v-model="keyword">
+                 </div>
+             </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="product in products">
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td class="d-flex justify-content-around">
+                            <router-link :to="{name: 'editproduct', params: { id: product.id }}" class="btn brandButton btn-sm">Edit</router-link>
+                            <button class="btn btn-danger btn-sm" @click="deleteProduct(product.id)">Remove</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+         </div>
     </div>
+
+    <router-link :to="{name: 'dashboard'}" class="text-xl fw-bold brandText">&#60;&#60;&#60; Go Back</router-link>
 </template>
 
 <script>

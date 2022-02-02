@@ -3,14 +3,14 @@ Vue.component('edit-quote-product-search', {
         <div class="my-4">
             <div class="card card-default">
                 <div class="card-header d-flex justify-content-around align-items-center">
-                    <h4 class="brandText mb-0">Search For Additional Products</h4>
-
+                    <h4 class="brandText mb-0">Add Products</h4>
+                    <button type="button" class="btn brandButton" @click="this.$router.push('/products/add')">Create New Product</button>
                     <div class="col-sm-6">
-                        <input class="form-control brandTextField text-center" type="text" placeholder="Search..." v-model="keyword">
+                        <input class="form-control brandTextField text-center" type="text" placeholder="Search existing products..." v-model="keyword">
                     </div>
                 </div>
-                <div class="card-body">
-                    <table v-if="keyword" class="table table-bordered table-sm">
+                <div v-if="keyword" class="card-body">
+                    <table class="table table-bordered table-sm">
                         <thead>
                         <tr>
                             <th>Name</th>
