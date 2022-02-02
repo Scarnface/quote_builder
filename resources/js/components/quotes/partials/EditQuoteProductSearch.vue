@@ -2,7 +2,7 @@ Vue.component('edit-quote-product-search', {
     <template>
         <div class="my-4">
             <div class="card card-default">
-                <div class="card-header d-flex justify-content-around align-items-center">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <h4 class="brandText mb-0">Add Products</h4>
                     <button type="button" class="btn brandButton" @click="this.$router.push('/products/add')">Create New Product</button>
                     <div class="col-sm-6">
