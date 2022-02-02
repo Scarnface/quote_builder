@@ -24,9 +24,9 @@
                         <td>{{ quote.last_name }}</td>
                         <td>{{ quote.email }}</td>
                         <td>{{ quote.address }}</td>
-                        <td>{{ quote.sub_total }}</td>
-                        <td>{{ quote.vat }}</td>
-                        <td>{{ quote.total }}</td>
+                        <td>£{{ quote.sub_total }}</td>
+                        <td>£{{ quote.vat }}</td>
+                        <td>£{{ quote.total }}</td>
                         <td class="d-flex justify-content-around">
                             <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn brandButton btn-sm">Edit</router-link>
                             <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn brandButton btn-sm">Email Quote</router-link>

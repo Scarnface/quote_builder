@@ -11287,6 +11287,7 @@ textarea.form-control-lg {
   }
 }
 .brandButton {
+  min-width: 65px;
   color: #fff;
   background-color: #056086;
 }

@@ -8,6 +8,7 @@
 @import '~bootstrap/scss/bootstrap';
 
 .brandButton {
+    min-width: 65px;
     color: #fff;
     background-color: #056086;
     &:hover {

@@ -23,7 +23,7 @@
                     <tr v-for="product in products">
                         <td>{{ product.name }}</td>
                         <td>{{ product.description }}</td>
-                        <td>{{ product.price }}</td>
+                        <td>£{{ product.price }}</td>
                         <td class="d-flex justify-content-around">
                             <router-link :to="{name: 'editproduct', params: { id: product.id }}" class="btn brandButton btn-sm">Edit</router-link>
                             <button class="btn btn-danger btn-sm" @click="deleteProduct(product.id)">Remove</button>

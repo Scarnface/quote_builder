@@ -19,7 +19,7 @@ Vue.component('edit-quote-product-list', {
                         <tr v-for="product in quote.products" :key="product.id">
                             <td>{{ product.name }}</td>
                             <td>{{ product.description }}</td>
-                            <td>{{ product.price }}</td>
+                            <td>£{{ product.price }}</td>
                             <td>
                                 <input type="number" min="1" class="form-control form-control-sm brandTextField" v-model="product.quantity">
                             </td>

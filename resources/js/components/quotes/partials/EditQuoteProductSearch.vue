@@ -23,7 +23,7 @@ Vue.component('edit-quote-product-search', {
                         <tr v-for="product in products" :key="product.id">
                             <td>{{ product.name }}</td>
                             <td>{{ product.description }}</td>
-                            <td>{{ product.price }}</td>
+                            <td>£{{ product.price }}</td>
                             <td>
                                 <div class="d-flex justify-content-center btn-group" role="group">
                                     <button class="btn btn-success btn-sm" @click="this.$emit('addquoteproduct', product)">Add</button>
