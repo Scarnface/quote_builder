@@ -90,38 +90,27 @@ export default {
         })
     },
     computed: {
-        // Calls the objToArray method to allow math functions
         subTotal: function () {
-            const resultArray = this.objToArray(this.quote.products);
             // Multiplies products.price * products.quantity and returns rounded to 2 D.P.
-            return resultArray.reduce(function (a, c) {
-                return a + Number((c[3] * c[4]) || 0)
-            }, 0).toFixed(2);
+            let st = 0
+            Array.prototype.forEach.call(this.quote.products,product => {
+                st += (product.quantity * product.price);
+            })
+            this.quote.sub_total = st.toFixed(2);
+            return this.quote.sub_total
         },
         vat: function () {
             // Multiply subtotal by 20% for VAT
-            return Number(this.subTotal * 0.2).toFixed(2);
+            this.quote.vat = (Number(this.subTotal) * 0.2).toFixed(2);
+            return this.quote.vat
         },
         total: function () {
             // Adds VAT to subtotal and returns total
-            return (Number(this.subTotal) + Number(this.vat)).toFixed(2);
+            this.quote.total = (Number(this.subTotal) + Number(this.vat)).toFixed(2);
+            return this.quote.total
         }
     },
     methods: {
-        // Converts JSON to arrays
-        objToArray(obj) {
-            const result = [];
-            for (const prop in obj) {
-                const value = obj[prop];
-                // If nested object, recurse
-                if (typeof value === 'object') {
-                    result.push(this.objToArray(value));
-                } else {
-                    result.push(value);
-                }
-            }
-            return result
-        },
         addQuoteProduct(product) {
             // Tests if the product is already in the quote
             if(this.quote.products.findIndex(x => x.id === product.id) === -1) {
@@ -175,11 +164,6 @@ export default {
                             console.error(error);
                         });
                 }
-
-                // Assign the totals to the quote data to be saved
-                this.quote.sub_total = this.subTotal;
-                this.quote.vat = this.vat;
-                this.quote.total = this.total;
 
                 // Save customer details and totals
                 this.$axios.put(`/api/quotes/update/${this.$route.params.id}`, this.quote)

@@ -23011,8 +23011,6 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -23043,40 +23041,27 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
     });
   },
   computed: {
-    // Calls the objToArray method to allow math functions
     subTotal: function subTotal() {
-      var resultArray = this.objToArray(this.quote.products); // Multiplies products.price * products.quantity and returns rounded to 2 D.P.
-
-      return resultArray.reduce(function (a, c) {
-        return a + Number(c[3] * c[4] || 0);
-      }, 0).toFixed(2);
+      // Multiplies products.price * products.quantity and returns rounded to 2 D.P.
+      var st = 0;
+      Array.prototype.forEach.call(this.quote.products, function (product) {
+        st += product.quantity * product.price;
+      });
+      this.quote.sub_total = st.toFixed(2);
+      return this.quote.sub_total;
     },
     vat: function vat() {
       // Multiply subtotal by 20% for VAT
-      return Number(this.subTotal * 0.2).toFixed(2);
+      this.quote.vat = (Number(this.subTotal) * 0.2).toFixed(2);
+      return this.quote.vat;
     },
     total: function total() {
       // Adds VAT to subtotal and returns total
-      return (Number(this.subTotal) + Number(this.vat)).toFixed(2);
+      this.quote.total = (Number(this.subTotal) + Number(this.vat)).toFixed(2);
+      return this.quote.total;
     }
   },
   methods: {
-    // Converts JSON to arrays
-    objToArray: function objToArray(obj) {
-      var result = [];
-
-      for (var prop in obj) {
-        var value = obj[prop]; // If nested object, recurse
-
-        if (_typeof(value) === 'object') {
-          result.push(this.objToArray(value));
-        } else {
-          result.push(value);
-        }
-      }
-
-      return result;
-    },
     addQuoteProduct: function addQuoteProduct(product) {
       // Tests if the product is already in the quote
       if (this.quote.products.findIndex(function (x) {
@@ -23150,17 +23135,13 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
             _this2.$axios["delete"]("/api/productQuote/delete/".concat(_product.pivotID))["catch"](function (error) {
               console.error(error);
             });
-          } // Assign the totals to the quote data to be saved
+          } // Save customer details and totals
 
         } catch (err) {
           _iterator2.e(err);
         } finally {
           _iterator2.f();
         }
-
-        _this2.quote.sub_total = _this2.subTotal;
-        _this2.quote.vat = _this2.vat;
-        _this2.quote.total = _this2.total; // Save customer details and totals
 
         _this2.$axios.put("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
           _this2.$router.push({
@@ -24623,7 +24604,7 @@ var _hoisted_2 = {
   "class": "card card-default"
 };
 var _hoisted_3 = {
-  "class": "card-header d-flex justify-content-around align-items-center"
+  "class": "card-header d-flex justify-content-between align-items-center"
 };
 
 var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", {
