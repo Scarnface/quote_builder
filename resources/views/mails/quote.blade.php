@@ -1,7 +1,5 @@
 @component('mail::message')
 
-<img src="https://i.postimg.cc/GmzQxDj7/cover.png" alt="logo">
-
 Hello **{{$quote->first_name}} {{$quote->last_name}}**,
 
 Thank you for choosing Quote Builder!
