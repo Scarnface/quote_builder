@@ -13,7 +13,7 @@ class CreateQuotesTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
-            $table->string('address')->nullable();
+            $table->string('address');
             $table->decimal('sub_total', 9, 2)->nullable();
             $table->decimal('vat', 9, 2)->nullable();
             $table->decimal('total', 9, 2)->nullable();

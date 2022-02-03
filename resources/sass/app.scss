@@ -33,3 +33,31 @@ a {
         box-shadow: 0 0 10px #056086;
     }
 }
+
+.router-link-active {
+    border-bottom: 5px solid #056086;
+}
+
+.hero {
+    width: 100%;
+    height: 70vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38)), url("/images/planning.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.heroText {
+    width: 20%;
+    font-weight: 900;
+    color: #fff;
+    text-align: left;
+    position: absolute;
+    top: 45%;
+    left: 12.5%;
+    font-size: 2rem;
+    span {
+        color: #0799b2;
+        text-shadow: 1px 1px 4px #000;
+    }
+}
