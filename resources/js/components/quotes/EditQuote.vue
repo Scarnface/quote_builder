@@ -168,6 +168,7 @@ export default {
                 // Save customer details and totals
                 this.$axios.put(`/api/quotes/update/${this.$route.params.id}`, this.quote)
                     .then(response => {
+                        alert(response.data);
                         this.$router.push({name: 'quotes'});
                     })
                     .catch(function (error) {

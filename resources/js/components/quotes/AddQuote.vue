@@ -59,6 +59,7 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/quotes/add', this.quote)
                     .then(response => {
+                        alert(response.data);
                         this.$router.push({name: 'quotes'})
                     })
                     .catch(e => {

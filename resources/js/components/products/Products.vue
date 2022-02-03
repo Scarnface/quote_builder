@@ -95,7 +95,7 @@ export default {
                 this.$axios.delete(`/api/products/delete/${id}`)
                     .then(response => {
                         let i = this.products.map(item => item.id).indexOf(id);
-                        this.products.splice(i, 1)
+                        this.products.splice(i, 1);
                     })
                     .catch(function (error) {
                         console.error(error);

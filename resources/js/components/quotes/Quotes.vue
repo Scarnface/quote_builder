@@ -64,7 +64,7 @@ export default {
                 this.$axios.delete(`/api/quotes/delete/${id}`)
                     .then(response => {
                         let i = this.quotes.map(item => item.id).indexOf(id);
-                        this.quotes.splice(i, 1)
+                        this.quotes.splice(i, 1);
                     })
                     .catch(function (error) {
                         console.error(error);

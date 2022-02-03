@@ -22771,9 +22771,7 @@ __webpack_require__.r(__webpack_exports__);
       // The specific product to be added
       product: {},
       // Validation error messages
-      errors: null,
-      // Response messages
-      message: null
+      errors: null
     };
   },
   methods: {
@@ -22783,7 +22781,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this.$axios.post('/api/products/add', _this.product).then(function (response) {
-          _this.message = response;
+          alert(response.data);
 
           _this.$router.back();
         })["catch"](function (e) {
@@ -22840,6 +22838,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this2.$axios.put("/api/products/update/".concat(_this2.$route.params.id), _this2.product).then(function (response) {
+          alert(response.data);
+
           _this2.$router.push({
             name: 'products'
           });
@@ -22978,6 +22978,8 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this.$axios.post('/api/quotes/add', _this.quote).then(function (response) {
+          alert(response.data);
+
           _this.$router.push({
             name: 'quotes'
           });
@@ -23150,6 +23152,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         }
 
         _this2.$axios.put("/api/quotes/update/".concat(_this2.$route.params.id), _this2.quote).then(function (response) {
+          alert(response.data);
+
           _this2.$router.push({
             name: 'quotes'
           });
@@ -23703,9 +23707,6 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("<<< Go Back");
 
-var _hoisted_16 = {
-  key: 0
-};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -23769,9 +23770,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     _: 1
     /* STABLE */
 
-  }), $data.message ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.message), 1
-  /* TEXT */
-  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  })], 64
   /* STABLE_FRAGMENT */
   );
 }
