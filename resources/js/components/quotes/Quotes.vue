@@ -73,7 +73,7 @@ export default {
         },
         sendQuoteEmail(id) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                axios.get(`/api/send/${id}`)
+                this.$axios.get(`/api/send/${id}`)
                     .catch(function (error) {
                         console.error(error);
                     });

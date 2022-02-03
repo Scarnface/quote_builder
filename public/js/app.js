@@ -23211,8 +23211,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     sendQuoteEmail: function sendQuoteEmail(id) {
+      var _this3 = this;
+
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        axios.get("/api/send/".concat(id))["catch"](function (error) {
+        _this3.$axios.get("/api/send/".concat(id))["catch"](function (error) {
           console.error(error);
         });
       });
