@@ -53,7 +53,7 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.post('/api/products/add', this.product)
                     .then(response => {
-                        this.$router.push({name: 'products'})
+                        this.$router.back();
                     })
                     .catch(e => {
                         this.errors = e.response.data.errors;

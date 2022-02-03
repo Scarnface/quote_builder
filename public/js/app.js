@@ -22781,9 +22781,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
         _this.$axios.post('/api/products/add', _this.product).then(function (response) {
-          _this.$router.push({
-            name: 'products'
-          });
+          _this.$router.back();
         })["catch"](function (e) {
           _this.errors = e.response.data.errors;
         });
