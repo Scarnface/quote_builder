@@ -12,5 +12,7 @@ class EmailController extends Controller
     {
         $quote = Quote::find($id);
         Mail::to($quote->email)->send(new QuoteMail($quote));
+
+        return response()->json('Email Sent');
     }
 }

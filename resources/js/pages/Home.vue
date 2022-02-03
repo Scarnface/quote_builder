@@ -1,5 +1,5 @@
 <template>
-    <div class="hero">
+    <div class="hero rounded">
         <h3 class="heroText"><span>Quote builder</span><br> provides fast, flexible and cost effective project planning and customer invoicing.</h3>
     </div>
 </template>

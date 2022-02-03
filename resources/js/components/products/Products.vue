@@ -41,10 +41,10 @@
 export default {
     data() {
         return {
+            // The live search products
+            products: {},
             // The live search keyword
             keyword: null,
-            // The live search products
-            products: {}
         }
     },
     created() {
