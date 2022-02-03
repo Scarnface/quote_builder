@@ -23,6 +23,13 @@
                         <input id="apprice" type="text" class="form-control brandTextField" v-model="product.price">
                     </div>
                 </div>
+                <div v-if="errors" class="pt-3">
+                    <div v-for="(v, k) in errors" :key="k">
+                        <p class="text-danger fw-bold" v-for="error in v" :key="error">
+                            {{ error }}
+                        </p>
+                    </div>
+                </div>
                 <button type="submit" class="btn brandButton mt-3">Create Product</button>
             </form>
         </div>
@@ -35,7 +42,9 @@ export default {
     data() {
         return {
             // The specific product to be added
-            product: {}
+            product: {},
+            // Validation error messages
+            errors: null,
         }
     },
     methods: {
@@ -46,8 +55,8 @@ export default {
                     .then(response => {
                         this.$router.push({name: 'products'})
                     })
-                    .catch(function (error) {
-                        console.error(error);
+                    .catch(e => {
+                        this.errors = e.response.data.errors;
                     });
             })
         }

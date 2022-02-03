@@ -30,14 +30,6 @@
         <div id="app">
         </div>
 
-        @if ($errors->any())
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li class="list-none text-red-500 text-xs mt-1">{{ $error }}</li>
-                @endforeach
-            </ul>
-        @endif
-
         <script src="{{ mix('js/app.js') }}" type="text/javascript"></script>
     </body>
 </html>
