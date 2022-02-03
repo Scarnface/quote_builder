@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Quote as QuoteResource;
 use App\Models\Quote;
 use Illuminate\Http\Request;
+use App\Http\Requests\QuoteRequest;
 
 class QuoteController extends Controller
 {
@@ -17,18 +18,9 @@ class QuoteController extends Controller
     }
 
     // add quote
-    public function add(Request $request)
+    public function add(QuoteRequest $request)
     {
-        $quote = new Quote([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'email' => $request->email,
-            'address' => $request->address,
-            'sub_total' => 0,
-            'vat' => 0,
-            'total' => 0,
-        ]);
-        $quote->save();
+        Quote::create($request->validated());
 
         return response()->json('The quote was successfully added');
     }
@@ -41,10 +33,9 @@ class QuoteController extends Controller
     }
 
     // update quote
-    public function update($id, Request $request)
+    public function update(QuoteRequest $request, $id)
     {
-        $quote = Quote::find($id);
-        $quote->update($request->except(['products']));
+        Quote::find($id)->update($request->validated());
 
         return response()->json('The quote was successfully updated');
     }

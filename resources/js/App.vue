@@ -15,7 +15,7 @@
                 </div>
                 <!-- for non-logged in user-->
                 <div class="navbar-nav" v-else>
-                    <router-link to="/login" class="nav-item nav-link">login</router-link>
+                    <router-link to="/login" class="nav-item nav-link">Login</router-link>
                     <router-link to="/register" class="nav-item nav-link">Register</router-link>
                 </div>
             </div>
