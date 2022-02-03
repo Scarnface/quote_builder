@@ -118,9 +118,25 @@ export default {
                 product.quantity = 1;
                 let i = this.quote.products.length + 1;
                 this.quote.products.splice(i, 0, product);
+                // Display an alert item has been added
+                this.$swal({
+                    toast: true,
+                    position: 'bottom-end',
+                    icon: 'success',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    text: 'Product added successfully',
+                });
             } else {
-                // If true, alert the user
-                alert("Product already added to quote");
+                // Display an alert item already exists
+                this.$swal({
+                    toast: true,
+                    position: 'bottom-end',
+                    icon: 'warning',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    text: 'Product already added',
+                });
                 return;
             }
 
@@ -136,7 +152,16 @@ export default {
             let i = this.quote.products.map(item => item.id).indexOf(product.id);
             this.quote.products.splice(i, 1);
             // Record its removal in the removedProducts array
-            this.removedProducts.push(product)
+            this.removedProducts.push(product);
+            // Display an alert item has been deleted
+            this.$swal({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'warning',
+                showConfirmButton: false,
+                timer: 3000,
+                text: 'Product removed successfully',
+            });
         },
         // Updates the DB with all local data
         saveQuoteDetails() {
@@ -168,7 +193,14 @@ export default {
                 // Save customer details and totals
                 this.$axios.put(`/api/quotes/update/${this.$route.params.id}`, this.quote)
                     .then(response => {
-                        alert(response.data);
+                        this.$swal({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            text: response.data,
+                        });
                         this.$router.push({name: 'quotes'});
                     })
                     .catch(function (error) {

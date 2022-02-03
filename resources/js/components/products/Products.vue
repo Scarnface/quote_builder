@@ -96,6 +96,14 @@ export default {
                     .then(response => {
                         let i = this.products.map(item => item.id).indexOf(id);
                         this.products.splice(i, 1);
+                        this.$swal({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'warning',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            text: response.data,
+                        });
                     })
                     .catch(function (error) {
                         console.error(error);

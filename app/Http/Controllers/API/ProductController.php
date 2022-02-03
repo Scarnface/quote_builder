@@ -30,7 +30,7 @@ class ProductController extends Controller
     {
         Product::create($request->validated());
 
-        return response()->json('The product was successfully added');
+        return response()->json('Product added successfully');
     }
 
     // edit product page
@@ -45,7 +45,7 @@ class ProductController extends Controller
     {
         Product::find($id)->update($request->validated());
 
-        return response()->json('The product was successfully updated');
+        return response()->json('Product updated successfully');
     }
 
     // delete product
@@ -54,6 +54,6 @@ class ProductController extends Controller
         $product = Product::find($id);
         $product->delete();
 
-        return response()->json('The product was successfully deleted');
+        return response()->json('Product deleted successfully');
     }
 }

@@ -56,7 +56,14 @@ export default {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
                 this.$axios.put(`/api/products/update/${this.$route.params.id}`, this.product)
                     .then(response => {
-                        alert(response.data);
+                        this.$swal({
+                            toast: true,
+                            position: 'bottom-end',
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            text: response.data,
+                        });
                         this.$router.push({name: 'products'});
                     })
                     .catch(function (error) {

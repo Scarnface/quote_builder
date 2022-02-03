@@ -22,7 +22,7 @@ class QuoteController extends Controller
     {
         Quote::create($request->validated());
 
-        return response()->json('The quote was successfully added');
+        return response()->json('Quote added successfully');
     }
 
     // edit quote page
@@ -37,7 +37,7 @@ class QuoteController extends Controller
     {
         Quote::find($id)->update($request->validated());
 
-        return response()->json('The quote was successfully updated');
+        return response()->json('Quote updated successfully');
     }
 
     // delete quote
@@ -46,6 +46,6 @@ class QuoteController extends Controller
         $quote = Quote::find($id);
         $quote->delete();
 
-        return response()->json('The quote was successfully deleted');
+        return response()->json('Quote deleted successfully');
     }
 }

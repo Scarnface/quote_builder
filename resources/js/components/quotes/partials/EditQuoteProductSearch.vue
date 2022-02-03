@@ -26,7 +26,7 @@ Vue.component('edit-quote-product-search', {
                             <td>£{{ product.price }}</td>
                             <td>
                                 <div class="d-flex justify-content-center btn-group" role="group">
-                                    <button class="btn btn-success btn-sm" @click="this.$emit('addquoteproduct', product)">Add</button>
+                                    <button class="btn btn-success btn-sm" @click="this.$emit('addquoteproduct', product); this.clearKW()">Add</button>
                                 </div>
                             </td>
                         </tr>
@@ -70,6 +70,10 @@ Vue.component('edit-quote-product-search', {
                 } else {
                     this.products = {};
                 }
+            },
+            // Clears the keyword on adding a product to clear the product list from view
+            clearKW() {
+                this.keyword = '';
             },
         },
         beforeRouteEnter(to, from, next) {
