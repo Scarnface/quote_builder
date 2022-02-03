@@ -4,11 +4,14 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\QuoteController;
 use App\Http\Controllers\API\ProductController;
 use App\Http\Controllers\API\ProductQuoteController;
+use App\Http\Controllers\EmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+
+Route::get('/send/{quote}', [EmailController::class, 'send'])->middleware('auth:sanctum');
 
 Route::group(['prefix' => 'quotes', 'middleware' => 'auth:sanctum'], function () {
     Route::get('/', [QuoteController::class, 'index']);

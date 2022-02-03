@@ -28,8 +28,8 @@
                         <td>£{{ quote.vat }}</td>
                         <td>£{{ quote.total }}</td>
                         <td class="d-flex justify-content-around">
-                            <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn brandButton btn-sm">Edit</router-link>
-                            <router-link :to="{name: 'editquote', params: { id: quote.id }}" class="btn brandButton btn-sm">Email Quote</router-link>
+                            <router-link class="btn brandButton btn-sm" :to="{name: 'editquote', params: { id: quote.id }}">Edit</router-link>
+                            <button class="btn brandButton btn-sm" @click="sendQuoteEmail(quote.id)">Email Quote</button>
                             <button class="btn btn-danger btn-sm" @click="deleteQuote(quote.id)">Remove</button>
                         </td>
                     </tr>
@@ -70,7 +70,15 @@ export default {
                         console.error(error);
                     });
             })
-        }
+        },
+        sendQuoteEmail(id) {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                axios.get(`/api/send/${id}`)
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+        },
     },
     beforeRouteEnter(to, from, next) {
         if (!window.Laravel.isLoggedin) {

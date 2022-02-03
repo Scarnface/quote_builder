@@ -23209,6 +23209,13 @@ __webpack_require__.r(__webpack_exports__);
           console.error(error);
         });
       });
+    },
+    sendQuoteEmail: function sendQuoteEmail(id) {
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        axios.get("/api/send/".concat(id))["catch"](function (error) {
+          console.error(error);
+        });
+      });
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -24447,8 +24454,7 @@ var _hoisted_6 = {
 
 var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Edit");
 
-var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Email Quote");
-
+var _hoisted_8 = ["onClick"];
 var _hoisted_9 = ["onClick"];
 
 var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("<<< Go Back");
@@ -24482,13 +24488,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, "£" + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(quote.total), 1
     /* TEXT */
     ), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
+      "class": "btn brandButton btn-sm",
       to: {
         name: 'editquote',
         params: {
           id: quote.id
         }
-      },
-      "class": "btn brandButton btn-sm"
+      }
     }, {
       "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
         return [_hoisted_7];
@@ -24498,24 +24504,14 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
     }, 1032
     /* PROPS, DYNAMIC_SLOTS */
-    , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
-      to: {
-        name: 'editquote',
-        params: {
-          id: quote.id
-        }
-      },
-      "class": "btn brandButton btn-sm"
-    }, {
-      "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-        return [_hoisted_8];
-      }),
-      _: 2
-      /* DYNAMIC */
-
-    }, 1032
-    /* PROPS, DYNAMIC_SLOTS */
     , ["to"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      "class": "btn brandButton btn-sm",
+      onClick: function onClick($event) {
+        return $options.sendQuoteEmail(quote.id);
+      }
+    }, "Email Quote", 8
+    /* PROPS */
+    , _hoisted_8), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       "class": "btn btn-danger btn-sm",
       onClick: function onClick($event) {
         return $options.deleteQuote(quote.id);
