@@ -11318,6 +11318,7 @@ a:hover {
 .hero {
   width: 100%;
   height: 70vh;
+  position: relative;
   background-image: linear-gradient(rgba(0, 0, 0, 0.38), rgba(0, 0, 0, 0.38)), url("/images/planning.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -11330,11 +11331,18 @@ a:hover {
   color: #fff;
   text-align: left;
   position: absolute;
-  top: 45%;
-  left: 12.5%;
+  top: 25%;
+  left: 7.5%;
   font-size: 2rem;
 }
 .heroText span {
   color: #0799b2;
   text-shadow: 1px 1px 4px #000;
+}
+@media (min-width: 1600px) {
+  .heroText {
+    width: 80%;
+    text-align: center;
+    top: 7.5%;
+  }
 }
