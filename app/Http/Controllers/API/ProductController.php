@@ -14,9 +14,12 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         if($request->keyword) {
-            $product = ProductResource::collection(Product::where('name', 'like', '%'.$request->keyword.'%')
+            $product = ProductResource::collection(Product::where('name', 'like', $request->keyword.'%')
                 ->orWhere('description', 'like', '%'.$request->keyword.'%')
-                ->orderByRaw('name like ? desc', $request->keyword)
+                // Order by name's closest match to keyword
+                ->orderByRaw('name like ? desc', $request->keyword.'%')
+                // Then order the description matches, but by name alphabetically
+                ->orderBy('name')
                 ->get());
         } else {
             $product =  ProductResource::collection(Product::all());

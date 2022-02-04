@@ -21,7 +21,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:255|unique:products',
             'description' => 'required|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0.01',
         ];
     }
 
@@ -30,7 +30,7 @@ class ProductRequest extends FormRequest
         return [
             'name' => 'required|max:255|unique:products,name,' .$this->route('id'),
             'description' => 'required|max:255',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0.01',
         ];
     }
 }
