@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 12, 2022 at 09:57 AM
+-- Generation Time: Feb 04, 2022 at 10:27 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -112,11 +112,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'quos', 'Est ut quia et tempore quas incidunt aut voluptas.', '13.36', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
+(1, 'quos', 'Est ut quia et tempore quas incidunt aut voluptas.', '13.36', '2022-01-07 08:29:07', '2022-02-03 16:36:48'),
 (2, 'eius', 'Laboriosam temporibus dolor debitis quasi labore rem.', '25.66', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
-(3, 'voluptas', 'Aperiam officia odit harum.', '77.60', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
 (4, 'distinctio', 'Explicabo voluptatibus esse recusandae quos placeat sapiente.', '6.94', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
-(5, 'labore', 'Dolor et in omnis ea quasi occaecati.', '85.43', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
 (6, 'veniam', 'Quia unde rerum veritatis quia a quae distinctio.', '90.17', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
 (7, 'magni', 'Qui enim laudantium ut iusto ipsam itaque eius.', '50.87', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
 (8, 'recusandae', 'Velit eveniet possimus inventore autem.', '39.28', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
@@ -210,8 +208,7 @@ INSERT INTO `products` (`id`, `name`, `description`, `price`, `created_at`, `upd
 (96, 'magnam', 'Quia soluta hic enim error ab voluptatem.', '64.15', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
 (97, 'minus', 'Possimus ab facere atque sunt.', '6.78', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
 (98, 'maxime', 'Alias vel ut in.', '29.74', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
-(99, 'perferendis', 'Molestias non ad soluta dolores non.', '93.50', '2022-01-07 08:29:07', '2022-01-07 08:29:07'),
-(100, 'exercitationem', 'In facere ut laborum ut quo quos quae.', '98.33', '2022-01-07 08:29:07', '2022-01-07 08:29:07');
+(99, 'perferendis', 'Molestias non ad soluta dolores non.', '93.50', '2022-01-07 08:29:07', '2022-01-07 08:29:07');
 
 -- --------------------------------------------------------
 
@@ -233,8 +230,14 @@ CREATE TABLE `product_quote` (
 --
 
 INSERT INTO `product_quote` (`id`, `product_id`, `quote_id`, `quantity`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 5, '2022-01-07 08:32:04', '2022-01-07 08:32:04'),
-(2, 2, 1, 3, '2022-01-07 08:32:04', '2022-01-07 08:32:04');
+(1, 1, 1, 6, '2022-01-28 09:03:55', '2022-02-02 12:37:25'),
+(2, 2, 1, 3, '2022-01-28 09:03:55', '2022-01-28 09:03:55'),
+(9, 4, 1, 4, '2022-02-02 12:38:59', '2022-02-02 12:39:07'),
+(11, 4, 4, 1, '2022-02-03 09:09:36', '2022-02-03 09:09:36'),
+(12, 1, 5, 1, '2022-02-03 16:37:20', '2022-02-03 16:37:20'),
+(13, 18, 6, 1, '2022-02-03 16:40:32', '2022-02-03 16:40:32'),
+(14, 1, 7, 1, '2022-02-04 08:18:21', '2022-02-04 08:18:21'),
+(15, 2, 7, 1, '2022-02-04 08:18:21', '2022-02-04 08:18:21');
 
 -- --------------------------------------------------------
 
@@ -260,7 +263,7 @@ CREATE TABLE `quotes` (
 --
 
 INSERT INTO `quotes` (`id`, `first_name`, `last_name`, `email`, `address`, `sub_total`, `vat`, `total`, `created_at`, `updated_at`) VALUES
-(1, 'Testy', 'McTesty', 'testing@test.com', 'Somewhere, Anywhere, NW1 8QT', NULL, NULL, NULL, '2022-01-07 08:30:04', '2022-01-07 10:17:23');
+(1, 'Testy', 'McTest', 'testing@test.com', 'Somewhere, Anywhere, NW1 8QT', '184.96', '36.99', '221.95', '2022-01-07 08:30:04', '2022-02-02 12:39:07');
 
 -- --------------------------------------------------------
 
@@ -368,19 +371,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
 
 --
 -- AUTO_INCREMENT for table `product_quote`
 --
 ALTER TABLE `product_quote`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `quotes`
 --
 ALTER TABLE `quotes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
