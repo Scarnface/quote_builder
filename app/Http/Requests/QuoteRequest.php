@@ -33,9 +33,9 @@ class QuoteRequest extends FormRequest
             'last_name' => 'required|max:255',
             'email' => 'required|email|max:255',
             'address' => 'required|max:255',
-            'sub_total' => 'required|numeric|max:255',
-            'vat' => 'required|numeric|max:255',
-            'total' => 'required|numeric|max:255',
+            'sub_total' => 'required|numeric',
+            'vat' => 'required|numeric',
+            'total' => 'required|numeric',
         ];
     }
 }
