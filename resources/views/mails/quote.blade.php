@@ -2,13 +2,18 @@
 
 Hello **{{$quote->first_name}} {{$quote->last_name}}**,
 
-Thank you for choosing Quote Builder!
+Thank you for choosing Quote Builder. Please find your quote below:
 
-Please find your project quote below:
-
-Client Email: {{$quote->email}}
-
+Client Email: {{$quote->email}}\
 Delivery Address: {{$quote->address}}
+
+@component('mail::table')
+    |Product Name          | Description            | Price       | Quantity     |
+    | :----------------: | :---------------:  | :---------------: | :---------------: |
+    @foreach($quote->products as $p)
+        |{{ $p->name }}|{{ $p->description }}|£{{ $p->price }}| {{ $p->pivot->quantity }}|
+    @endforeach
+@endcomponent
 
 Subtotal: £{{$quote->sub_total}}
 
@@ -20,7 +25,7 @@ Total: £{{$quote->total}}
     View Quote
 @endcomponent
 
-Sincerely,
+Sincerely,\
 Quote Builder team.
 
 @endcomponent

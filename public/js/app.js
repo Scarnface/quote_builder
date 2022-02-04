@@ -23293,7 +23293,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this3.$axios.get("/api/send/".concat(id))["catch"](function (error) {
+        _this3.$axios.get("/api/send/".concat(id)).then(function (response) {
+          _this3.$swal({
+            toast: true,
+            position: 'bottom-end',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 3000,
+            text: response.data
+          });
+        })["catch"](function (error) {
           console.error(error);
         });
       });
