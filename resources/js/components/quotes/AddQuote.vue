@@ -8,25 +8,41 @@
                 <div class="row mb-3">
                     <label class="col-sm-2" for="aqfname">First Name</label>
                     <div class="col-sm-10">
-                        <input id="aqfname" type="text" class="form-control brandTextField" v-model="quote.first_name">
+                        <input id="aqfname"
+                               type="text"
+                               class="form-control brandTextField"
+                               placeholder="Enter clients first name..."
+                               v-model="quote.first_name">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2" for="aqlname">Last Name</label>
                     <div class="col-sm-10">
-                        <input id="aqlname" type="text" class="form-control brandTextField" v-model="quote.last_name">
+                        <input id="aqlname"
+                               type="text"
+                               class="form-control brandTextField"
+                               placeholder="Enter clients last name..."
+                               v-model="quote.last_name">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2" for="aqemail">Email</label>
                     <div class="col-sm-10">
-                        <input id="aqemail" type="text" class="form-control brandTextField" v-model="quote.email">
+                        <input id="aqemail"
+                               type="text"
+                               class="form-control brandTextField"
+                               placeholder="Enter clients email address..."
+                               v-model="quote.email">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2" for="aqaddress">Address</label>
                     <div class="col-sm-10">
-                        <input id="aqaddress" type="text" class="form-control brandTextField" v-model="quote.address">
+                        <input id="aqaddress"
+                               type="text"
+                               class="form-control brandTextField"
+                               placeholder="Enter clients delivery address..."
+                               v-model="quote.address">
                     </div>
                 </div>
                 <div v-if="errors" class="pt-3">

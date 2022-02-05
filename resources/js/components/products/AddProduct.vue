@@ -8,19 +8,33 @@
                 <div class="row mb-3">
                     <label class="col-sm-2" for="apname">Name</label>
                     <div class="col-sm-10">
-                        <input id="apname" type="text" class="form-control brandTextField" v-model="product.name">
+                        <input id="apname"
+                               type="text"
+                               class="form-control brandTextField"
+                               placeholder="Enter a short name i.e. BrandX white paint..."
+                               v-model="product.name">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <label class="col-sm-2" for="apdescription">Description</label>
                     <div class="col-sm-10">
-                        <input id="apdescription" type="text" class="form-control brandTextField" v-model="product.description">
+                        <input id="apdescription"
+                               type="text"
+                               class="form-control brandTextField"
+                               placeholder="Enter full product details..."
+                               v-model="product.description">
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2" for="apprice">Price</label>
+                    <label class="col-sm-2" for="apprice">Price (GBP)</label>
                     <div class="col-sm-10">
-                        <input id="apprice" type="text" class="form-control brandTextField" v-model="product.price">
+                        <span class="input-symbol">
+                            <input id="apprice"
+                                   type="text"
+                                   class="form-control brandTextField"
+                                   placeholder="Enter a price i.e. 0.50/9.99..."
+                                   v-model="product.price">
+                        </span>
                     </div>
                 </div>
                 <div v-if="errors" class="pt-3">

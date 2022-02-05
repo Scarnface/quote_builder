@@ -77,3 +77,17 @@ a {
         top: 7.5%;
     }
 }
+
+.input-symbol {
+    position: relative;
+}
+.input-symbol input {
+    padding-left:25px;
+}
+.input-symbol:after {
+    position: absolute;
+    top: 21px;
+    left: 10px;
+    content:"£";
+    font-weight: bold;
+}

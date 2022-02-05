@@ -157,7 +157,7 @@ export default {
             this.$swal({
                 toast: true,
                 position: 'bottom-end',
-                icon: 'warning',
+                icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
                 text: 'Product removed successfully',

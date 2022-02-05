@@ -22735,18 +22735,27 @@ __webpack_require__.r(__webpack_exports__);
     logout: function logout(e) {
       var _this = this;
 
-      console.log('ss');
-      e.preventDefault();
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this.$axios.post('/api/logout').then(function (response) {
-          if (response.data.success) {
-            window.location.href = "/";
-          } else {
-            console.log(response);
-          }
-        })["catch"](function (error) {
-          console.error(error);
-        });
+      this.$swal({
+        title: 'Are you sure you want to logout?',
+        confirmButtonColor: "#df4759",
+        showCancelButton: true,
+        confirmButtonText: 'Logout'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          e.preventDefault();
+
+          _this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+            _this.$axios.post('/api/logout').then(function (response) {
+              if (response.data.success) {
+                window.location.href = "/";
+              } else {
+                console.log(response);
+              }
+            })["catch"](function (error) {
+              console.error(error);
+            });
+          });
+        }
       });
     }
   }
@@ -22941,25 +22950,36 @@ __webpack_require__.r(__webpack_exports__);
     deleteProduct: function deleteProduct(id) {
       var _this3 = this;
 
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this3.$axios["delete"]("/api/products/delete/".concat(id)).then(function (response) {
-          var i = _this3.products.map(function (item) {
-            return item.id;
-          }).indexOf(id);
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#df4759',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _this3.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+            _this3.$axios["delete"]("/api/products/delete/".concat(id)).then(function (response) {
+              var i = _this3.products.map(function (item) {
+                return item.id;
+              }).indexOf(id);
 
-          _this3.products.splice(i, 1);
+              _this3.products.splice(i, 1);
 
-          _this3.$swal({
-            toast: true,
-            position: 'bottom-end',
-            icon: 'warning',
-            showConfirmButton: false,
-            timer: 3000,
-            text: response.data
+              _this3.$swal({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                text: response.data
+              });
+            })["catch"](function (error) {
+              console.error(error);
+            });
           });
-        })["catch"](function (error) {
-          console.error(error);
-        });
+        }
       });
     }
   },
@@ -23152,7 +23172,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.$swal({
         toast: true,
         position: 'bottom-end',
-        icon: 'warning',
+        icon: 'success',
         showConfirmButton: false,
         timer: 3000,
         text: 'Product removed successfully'
@@ -23268,25 +23288,36 @@ __webpack_require__.r(__webpack_exports__);
     deleteQuote: function deleteQuote(id) {
       var _this2 = this;
 
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this2.$axios["delete"]("/api/quotes/delete/".concat(id)).then(function (response) {
-          var i = _this2.quotes.map(function (item) {
-            return item.id;
-          }).indexOf(id);
+      this.$swal({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#df4759',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _this2.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+            _this2.$axios["delete"]("/api/quotes/delete/".concat(id)).then(function (response) {
+              var i = _this2.quotes.map(function (item) {
+                return item.id;
+              }).indexOf(id);
 
-          _this2.quotes.splice(i, 1);
+              _this2.quotes.splice(i, 1);
 
-          _this2.$swal({
-            toast: true,
-            position: 'bottom-end',
-            icon: 'warning',
-            showConfirmButton: false,
-            timer: 3000,
-            text: response.data
+              _this2.$swal({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                text: response.data
+              });
+            })["catch"](function (error) {
+              console.error(error);
+            });
           });
-        })["catch"](function (error) {
-          console.error(error);
-        });
+        }
       });
     },
     sendQuoteEmail: function sendQuoteEmail(id) {
@@ -23590,10 +23621,7 @@ var _hoisted_1 = {
 };
 
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "d-flex justify-content-center",
-  style: {
-    "margin": "1rem 0 1rem 0"
-  }
+  "class": "d-flex justify-content-center my-4"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   "class": "w-50",
   style: {
@@ -23614,7 +23642,7 @@ var _hoisted_4 = {
 };
 var _hoisted_5 = {
   key: 0,
-  "class": "navbar-nav"
+  "class": "navbar-nav w-100"
 };
 
 var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Dashboard");
@@ -23631,10 +23659,6 @@ var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNo
 
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Register");
 
-var _hoisted_12 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br", null, null, -1
-/* HOISTED */
-);
-
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
 
@@ -23642,7 +23666,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("nav", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" for logged-in user"), $data.isLoggedIn ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/dashboard",
-    "class": "nav-item nav-link"
+    "class": "h3 mb-0 nav-item nav-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_6];
@@ -23652,7 +23676,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/quotes",
-    "class": "nav-item nav-link"
+    "class": "h3 mb-0 nav-item nav-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_7];
@@ -23662,7 +23686,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/products",
-    "class": "nav-item nav-link"
+    "class": "h3 mb-0 nav-item nav-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_8];
@@ -23671,7 +23695,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     /* STABLE */
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("a", {
-    "class": "nav-item nav-link",
+    "class": "h3 mb-0 nav-item nav-link ms-auto",
     style: {
       "cursor": "pointer"
     },
@@ -23682,7 +23706,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     key: 1
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" for non-logged in user"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/login",
-    "class": "nav-item nav-link"
+    "class": "h3 mb-0 nav-item nav-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_10];
@@ -23692,7 +23716,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: "/register",
-    "class": "nav-item nav-link"
+    "class": "h3 mb-0 nav-item nav-link"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [_hoisted_11];
@@ -23702,7 +23726,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   })])], 2112
   /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */
-  ))])]), _hoisted_12, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)]);
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_view)]);
 }
 
 /***/ }),
@@ -23770,7 +23794,7 @@ var _hoisted_10 = {
 var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "class": "col-sm-2",
   "for": "apprice"
-}, "Price", -1
+}, "Price (GBP)", -1
 /* HOISTED */
 );
 
@@ -23778,18 +23802,21 @@ var _hoisted_12 = {
   "class": "col-sm-10"
 };
 var _hoisted_13 = {
+  "class": "input-symbol"
+};
+var _hoisted_14 = {
   key: 0,
   "class": "pt-3"
 };
 
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "submit",
   "class": "btn brandButton mt-3"
 }, "Create Product", -1
 /* HOISTED */
 );
 
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("<<< Go Back");
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("<<< Go Back");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_router_link = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("router-link");
@@ -23802,6 +23829,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "apname",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter a short name i.e. BrandX white paint...",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.product.name = $event;
     })
@@ -23811,21 +23839,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "apdescription",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter full product details...",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.product.description = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.product.description]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.product.description]])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     id: "apprice",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter a price i.e. 0.50/9.99...",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.product.price = $event;
     })
   }, null, 512
   /* NEED_PATCH */
-  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.product.price]])])]), $data.errors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_13, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.errors, function (v, k) {
+  ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.product.price]])])])]), $data.errors ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_14, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.errors, function (v, k) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       key: k
     }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)(v, function (error) {
@@ -23840,7 +23870,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ))]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_14], 32
+  ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_15], 32
   /* HYDRATE_EVENTS */
   )])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_router_link, {
     to: {
@@ -23849,7 +23879,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "class": "text-xl fw-bold brandText"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [_hoisted_15];
+      return [_hoisted_16];
     }),
     _: 1
     /* STABLE */
@@ -24230,6 +24260,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "aqfname",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter clients first name...",
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.quote.first_name = $event;
     })
@@ -24239,6 +24270,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "aqlname",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter clients last name...",
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.quote.last_name = $event;
     })
@@ -24248,6 +24280,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "aqemail",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter clients email address...",
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
       return $data.quote.email = $event;
     })
@@ -24257,6 +24290,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "aqaddress",
     type: "text",
     "class": "form-control brandTextField",
+    placeholder: "Enter clients delivery address...",
     "onUpdate:modelValue": _cache[3] || (_cache[3] = function ($event) {
       return $data.quote.address = $event;
     })

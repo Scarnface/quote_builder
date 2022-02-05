@@ -91,23 +91,34 @@ export default {
             }
         },
         deleteProduct(id) {
-            this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.delete(`/api/products/delete/${id}`)
-                    .then(response => {
-                        let i = this.products.map(item => item.id).indexOf(id);
-                        this.products.splice(i, 1);
-                        this.$swal({
-                            toast: true,
-                            position: 'bottom-end',
-                            icon: 'warning',
-                            showConfirmButton: false,
-                            timer: 3000,
-                            text: response.data,
-                        });
+            this.$swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#df4759',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                        this.$axios.delete(`/api/products/delete/${id}`)
+                            .then(response => {
+                                let i = this.products.map(item => item.id).indexOf(id);
+                                this.products.splice(i, 1);
+                                this.$swal({
+                                    toast: true,
+                                    position: 'bottom-end',
+                                    icon: 'success',
+                                    showConfirmButton: false,
+                                    timer: 3000,
+                                    text: response.data,
+                                });
+                            })
+                            .catch(function (error) {
+                                console.error(error);
+                            });
                     })
-                    .catch(function (error) {
-                        console.error(error);
-                    });
+                }
             })
         }
     },
