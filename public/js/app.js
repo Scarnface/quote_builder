@@ -23323,19 +23323,30 @@ __webpack_require__.r(__webpack_exports__);
     sendQuoteEmail: function sendQuoteEmail(id) {
       var _this3 = this;
 
-      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this3.$axios.get("/api/send/".concat(id)).then(function (response) {
-          _this3.$swal({
-            toast: true,
-            position: 'bottom-end',
-            icon: 'success',
-            showConfirmButton: false,
-            timer: 3000,
-            text: response.data
+      this.$swal({
+        title: 'Are you sure?',
+        text: "This will email the client!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#056086',
+        confirmButtonText: 'Yes, email them!'
+      }).then(function (result) {
+        if (result.isConfirmed) {
+          _this3.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+            _this3.$axios.get("/api/send/".concat(id)).then(function (response) {
+              _this3.$swal({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                text: response.data
+              });
+            })["catch"](function (error) {
+              console.error(error);
+            });
           });
-        })["catch"](function (error) {
-          console.error(error);
-        });
+        }
       });
     }
   },
