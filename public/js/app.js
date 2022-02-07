@@ -23392,45 +23392,57 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var v_pagination_3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! v-pagination-3 */ "./node_modules/v-pagination-3/dist/vue-pagination-2.min.js");
+/* harmony import */ var v_pagination_3__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(v_pagination_3__WEBPACK_IMPORTED_MODULE_0__);
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    Pagination: (v_pagination_3__WEBPACK_IMPORTED_MODULE_0___default())
+  },
   data: function data() {
     return {
       // The live search keyword
       keyword: null,
       // The live search products
-      products: {}
+      products: {},
+      // Pagination data
+      pagination: {
+        page: 1,
+        total_items: 0,
+        items_per_page: 0
+      }
     };
+  },
+  created: function created() {
+    // Fetch initial results
+    this.getResults();
   },
   watch: {
     // Triggers search whenever users add characters to the keyword
     keyword: function keyword(after, before) {
-      this.liveSearch();
+      // Reset first page before search to prevent being on a non-existent page when results update
+      this.pagination.page = 1;
+      this.getResults();
     }
   },
   methods: {
-    // Searches for products by keyword
-    liveSearch: function liveSearch() {
+    getResults: function getResults() {
       var _this = this;
 
-      if (this.keyword !== '') {
-        this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-          _this.$axios.get('/api/products/', {
-            params: {
-              keyword: _this.keyword
-            }
-          }).then(function (response) {
-            _this.products = response.data;
-          })["catch"](function (error) {
-            console.error(error);
-          });
-        }); // Removes search table by resetting variable if user deletes keyword from search
-      } else {
-        this.products = {};
-      }
-    },
-    // Clears the keyword on adding a product to clear the product list from view
-    clearKW: function clearKW() {
-      this.keyword = '';
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.pagination.page;
+      this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+        _this.$axios.get('/api/products/?page=' + page, {
+          params: {
+            keyword: _this.keyword
+          }
+        }).then(function (response) {
+          _this.products = response.data.data;
+          _this.pagination.total_items = response.data.pagination.total;
+          _this.pagination.items_per_page = response.data.pagination.per_page;
+        })["catch"](function (error) {
+          console.error(error);
+        });
+      });
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -24825,6 +24837,8 @@ var _hoisted_10 = ["onClick"];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _this = this;
 
+  var _component_pagination = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("pagination");
+
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     type: "button",
     "class": "btn brandButton",
@@ -24861,7 +24875,19 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     , _hoisted_10)])])]);
   }), 128
   /* KEYED_FRAGMENT */
-  ))])])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
+  ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
+    modelValue: $data.pagination.page,
+    "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
+      return $data.pagination.page = $event;
+    }),
+    records: this.pagination.total_items,
+    "per-page": this.pagination.items_per_page,
+    onPaginate: _cache[3] || (_cache[3] = function ($event) {
+      return $options.getResults();
+    })
+  }, null, 8
+  /* PROPS */
+  , ["modelValue", "records", "per-page"])])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]);
 }
 
 /***/ }),

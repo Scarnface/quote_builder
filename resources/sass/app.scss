@@ -102,3 +102,8 @@ a {
     background-color: #056086;
     border-color: #056086;
 }
+
+li.VuePagination__pagination-item:first-child,
+li.VuePagination__pagination-item:last-child {
+    display: none;
+}
