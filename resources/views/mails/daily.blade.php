@@ -9,7 +9,7 @@ please find below details of all new quotes created today.
     |Customer Email          | Total             | Link       |
     | :----------------: | :---------------:  | :---------------: |
     @foreach($quotes as  $q)
-    |Client Email: {{ $q->email }}|Total: £{{ $q->total }}|[View Quote]({{ url(env('APP_URL') . '/quotes/edit/' . $q->id) }})
+    |Client Email: {{ $q->email }}|Total: £{{ $q->total }}|[View Quote]({{ url(env('APP_URL') . 'quotes/edit/' . $q->id) }})
     @endforeach
 @endcomponent
 

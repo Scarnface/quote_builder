@@ -21,7 +21,7 @@ VAT: £{{$quote->vat}}
 
 Total: £{{$quote->total}}
 
-@component('mail::button', ['url' => env('APP_URL') . '/quotes/edit/' . $quote->id])
+@component('mail::button', ['url' => env('APP_URL') . 'quotes/edit/' . $quote->id])
     View Quote
 @endcomponent
 
