@@ -11348,6 +11348,7 @@ a:hover {
 }
 
 .input-symbol {
+  display: inline-block;
   position: relative;
 }
 
@@ -11357,7 +11358,7 @@ a:hover {
 
 .input-symbol:after {
   position: absolute;
-  top: 21px;
+  top: 7px;
   left: 10px;
   content: "£";
   font-weight: bold;
