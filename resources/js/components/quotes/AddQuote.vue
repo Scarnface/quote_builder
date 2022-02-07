@@ -81,7 +81,7 @@ export default {
                             icon: 'success',
                             showConfirmButton: false,
                             timer: 3000,
-                            text: response.data,
+                            title: response.data,
                         });
                         this.$router.push({name: 'quotes'})
                     })

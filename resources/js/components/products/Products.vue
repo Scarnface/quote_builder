@@ -77,17 +77,9 @@ export default {
                             console.error(error);
                         });
                 })
-                // Removes search table by resetting variable if user deletes keyword from search
+            // Removes search table by resetting variable if user deletes keyword from search
             } else {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.get('/api/products')
-                        .then(response => {
-                            this.products = response.data;
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
-                })
+                this.products = {};
             }
         },
         deleteProduct(id) {
@@ -111,7 +103,7 @@ export default {
                                     icon: 'success',
                                     showConfirmButton: false,
                                     timer: 3000,
-                                    text: response.data,
+                                    title: response.data,
                                 });
                             })
                             .catch(function (error) {

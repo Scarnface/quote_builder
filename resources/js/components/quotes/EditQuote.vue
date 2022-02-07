@@ -50,7 +50,9 @@
     </div>
     <edit-quote-product-search
         @addquoteproduct="addQuoteProduct" />
+    <!-- Display the section only if there are products in the quote -->
     <edit-quote-product-list
+        v-if="quote.products.length"
         :quote="quote"
         @deletequoteproduct="deleteQuoteProduct"
     />
@@ -125,7 +127,7 @@ export default {
                     icon: 'success',
                     showConfirmButton: false,
                     timer: 3000,
-                    text: 'Product added successfully',
+                    title: 'Product added successfully',
                 });
             } else {
                 // Display an alert item already exists
@@ -135,7 +137,7 @@ export default {
                     icon: 'warning',
                     showConfirmButton: false,
                     timer: 3000,
-                    text: 'Product already added',
+                    title: 'Product already added',
                 });
                 return;
             }
@@ -160,7 +162,7 @@ export default {
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
-                text: 'Product removed successfully',
+                title: 'Product removed successfully',
             });
         },
         // Updates the DB with all local data
@@ -199,7 +201,7 @@ export default {
                             icon: 'success',
                             showConfirmButton: false,
                             timer: 3000,
-                            text: response.data,
+                            title: response.data,
                         });
                         this.$router.push({name: 'quotes'});
                     })

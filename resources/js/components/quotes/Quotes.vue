@@ -80,7 +80,7 @@ export default {
                                     icon: 'success',
                                     showConfirmButton: false,
                                     timer: 3000,
-                                    text: response.data,
+                                    title: response.data,
                                 });
                             })
                             .catch(function (error) {
@@ -109,7 +109,7 @@ export default {
                                     icon: 'success',
                                     showConfirmButton: false,
                                     timer: 3000,
-                                    text: response.data,
+                                    title: response.data,
                                 });
                             })
                             .catch(function (error) {

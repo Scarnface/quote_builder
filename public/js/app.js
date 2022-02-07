@@ -22796,7 +22796,7 @@ __webpack_require__.r(__webpack_exports__);
             icon: 'success',
             showConfirmButton: false,
             timer: 3000,
-            text: response.data
+            title: response.data
           });
 
           _this.$router.back();
@@ -22860,7 +22860,7 @@ __webpack_require__.r(__webpack_exports__);
             icon: 'success',
             showConfirmButton: false,
             timer: 3000,
-            text: response.data
+            title: response.data
           });
 
           _this2.$router.push({
@@ -22938,13 +22938,7 @@ __webpack_require__.r(__webpack_exports__);
           });
         }); // Removes search table by resetting variable if user deletes keyword from search
       } else {
-        this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-          _this2.$axios.get('/api/products').then(function (response) {
-            _this2.products = response.data;
-          })["catch"](function (error) {
-            console.error(error);
-          });
-        });
+        this.products = {};
       }
     },
     deleteProduct: function deleteProduct(id) {
@@ -22973,7 +22967,7 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
-                text: response.data
+                title: response.data
               });
             })["catch"](function (error) {
               console.error(error);
@@ -23027,7 +23021,7 @@ __webpack_require__.r(__webpack_exports__);
             icon: 'success',
             showConfirmButton: false,
             timer: 3000,
-            text: response.data
+            title: response.data
           });
 
           _this.$router.push({
@@ -23136,7 +23130,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           icon: 'success',
           showConfirmButton: false,
           timer: 3000,
-          text: 'Product added successfully'
+          title: 'Product added successfully'
         });
       } else {
         // Display an alert item already exists
@@ -23146,7 +23140,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           icon: 'warning',
           showConfirmButton: false,
           timer: 3000,
-          text: 'Product already added'
+          title: 'Product already added'
         });
         return;
       } // Tests if the product being added has previously been removed from the live data
@@ -23175,7 +23169,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         icon: 'success',
         showConfirmButton: false,
         timer: 3000,
-        text: 'Product removed successfully'
+        title: 'Product removed successfully'
       });
     },
     // Updates the DB with all local data
@@ -23233,7 +23227,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
             icon: 'success',
             showConfirmButton: false,
             timer: 3000,
-            text: response.data
+            title: response.data
           });
 
           _this2.$router.push({
@@ -23311,7 +23305,7 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
-                text: response.data
+                title: response.data
               });
             })["catch"](function (error) {
               console.error(error);
@@ -23340,7 +23334,7 @@ __webpack_require__.r(__webpack_exports__);
                 icon: 'success',
                 showConfirmButton: false,
                 timer: 3000,
-                text: response.data
+                title: response.data
               });
             })["catch"](function (error) {
               console.error(error);
@@ -23466,6 +23460,14 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     if (window.Laravel.user) {
       this.name = window.Laravel.user.name;
+      this.$swal({
+        toast: true,
+        position: 'bottom-end',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 3000,
+        title: 'Logged In'
+      });
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
@@ -24522,12 +24524,13 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onAddquoteproduct: $options.addQuoteProduct
   }, null, 8
   /* PROPS */
-  , ["onAddquoteproduct"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_edit_quote_product_list, {
+  , ["onAddquoteproduct"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Display the section only if there are products in the quote "), $data.quote.products.length ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_edit_quote_product_list, {
+    key: 0,
     quote: $data.quote,
     onDeletequoteproduct: $options.deleteQuoteProduct
   }, null, 8
   /* PROPS */
-  , ["quote", "onDeletequoteproduct"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  , ["quote", "onDeletequoteproduct"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn brandButton my-4",
     onClick: _cache[4] || (_cache[4] = function ($event) {
       return _this.saveQuoteDetails();
@@ -24865,10 +24868,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  "class": "d-flex align-items-center"
+};
+var _hoisted_2 = {
+  "class": "text-center w-100 mt-5 pt-5"
+};
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, " Welcome " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.name), 1
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", _hoisted_2, "Welcome " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.name), 1
   /* TEXT */
-  );
+  )]);
 }
 
 /***/ }),

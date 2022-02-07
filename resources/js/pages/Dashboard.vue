@@ -1,6 +1,6 @@
 <template>
-    <div>
-        Welcome {{ name }}
+    <div class="d-flex align-items-center">
+        <h1 class="text-center w-100 mt-5 pt-5">Welcome {{ name }}</h1>
     </div>
 </template>
 
@@ -15,6 +15,14 @@ export default {
     created() {
         if (window.Laravel.user) {
             this.name = window.Laravel.user.name
+            this.$swal({
+                toast: true,
+                position: 'bottom-end',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 3000,
+                title: 'Logged In',
+            });
         }
     },
     beforeRouteEnter(to, from, next) {
