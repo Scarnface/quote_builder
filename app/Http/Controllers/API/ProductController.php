@@ -20,12 +20,20 @@ class ProductController extends Controller
                 ->orderByRaw('name like ? desc', $request->keyword.'%')
                 // Then order the description matches, but by name alphabetically
                 ->orderBy('name')
-                ->get());
+                ->paginate(10));
         } else {
-            $product =  ProductResource::collection(Product::all());
+            $product =  ProductResource::collection(Product::paginate(10));
         }
 
-        return response()->json($product);
+        $response = [
+            'pagination' => [
+                'total' => $product->total(),
+                'per_page' => $product->perPage(),
+            ],
+            'data' => $product
+        ];
+
+        return response()->json($response);
     }
 
     // add product

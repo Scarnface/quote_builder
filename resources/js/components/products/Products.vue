@@ -31,6 +31,10 @@
                     </tr>
                 </tbody>
             </table>
+             <pagination v-model="page"
+                         :records="this.pagination.total_items"
+                         :per-page="this.pagination.items_per_page"
+                         @paginate="getResults()"/>
          </div>
     </div>
 
@@ -38,25 +42,29 @@
 </template>
 
 <script>
+import Pagination from 'v-pagination-3';
+
 export default {
+    components: {
+        Pagination
+    },
     data() {
         return {
             // The live search products
             products: {},
             // The live search keyword
             keyword: null,
+            // Pagination data
+            page: 1,
+            pagination: {
+                total_items: 0,
+                items_per_page: 0,
+            }
         }
     },
     created() {
-        this.$axios.get('/sanctum/csrf-cookie').then(response => {
-            this.$axios.get('/api/products')
-                .then(response => {
-                    this.products = response.data;
-                })
-                .catch(function (error) {
-                    console.error(error);
-                });
-        })
+        // Fetch initial results
+        this.getResults();
     },
     watch: {
         // Triggers search whenever users add characters to the keyword
@@ -65,13 +73,28 @@ export default {
         }
     },
     methods: {
+        getResults(page = this.page) {
+            this.$axios.get('/sanctum/csrf-cookie').then(response => {
+                this.$axios.get('/api/products/?page=' + page)
+                    .then(response => {
+                        this.products = response.data.data;
+                        this.pagination.total_items = response.data.pagination.total;
+                        this.pagination.items_per_page = response.data.pagination.per_page;
+                    })
+                    .catch(function (error) {
+                        console.error(error);
+                    });
+            })
+        },
         // Searches for products by keyword
-        liveSearch() {
+        liveSearch(page = this.page) {
             if(this.keyword !== '') {
                 this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.get('/api/products/', { params: { keyword: this.keyword } })
+                    this.$axios.get('/api/products/?page=' + page, { params: { keyword: this.keyword } })
                         .then(response => {
-                            this.products = response.data;
+                            this.products = response.data.data;
+                            this.pagination.total_items = response.data.pagination.total;
+                            this.pagination.items_per_page = response.data.pagination.per_page;
                         })
                         .catch(function (error) {
                             console.error(error);
