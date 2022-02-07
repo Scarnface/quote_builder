@@ -31,7 +31,7 @@
                     </tr>
                 </tbody>
             </table>
-             <pagination v-model="page"
+             <pagination v-model="pagination.page"
                          :records="this.pagination.total_items"
                          :per-page="this.pagination.items_per_page"
                          @paginate="getResults()"/>
@@ -55,8 +55,8 @@ export default {
             // The live search keyword
             keyword: null,
             // Pagination data
-            page: 1,
             pagination: {
+                page: 1,
                 total_items: 0,
                 items_per_page: 0,
             }
@@ -69,13 +69,15 @@ export default {
     watch: {
         // Triggers search whenever users add characters to the keyword
         keyword(after, before) {
-            this.liveSearch();
+            // Reset first page before search to prevent being on a non-existent page when results update
+            this.pagination.page = 1;
+            this.getResults();
         }
     },
     methods: {
-        getResults(page = this.page) {
+        getResults(page = this.pagination.page) {
             this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                this.$axios.get('/api/products/?page=' + page)
+                this.$axios.get('/api/products/?page=' + page, { params: { keyword: this.keyword } })
                     .then(response => {
                         this.products = response.data.data;
                         this.pagination.total_items = response.data.pagination.total;
@@ -85,25 +87,6 @@ export default {
                         console.error(error);
                     });
             })
-        },
-        // Searches for products by keyword
-        liveSearch(page = this.page) {
-            if(this.keyword !== '') {
-                this.$axios.get('/sanctum/csrf-cookie').then(response => {
-                    this.$axios.get('/api/products/?page=' + page, { params: { keyword: this.keyword } })
-                        .then(response => {
-                            this.products = response.data.data;
-                            this.pagination.total_items = response.data.pagination.total;
-                            this.pagination.items_per_page = response.data.pagination.per_page;
-                        })
-                        .catch(function (error) {
-                            console.error(error);
-                        });
-                })
-            // Removes search table by resetting variable if user deletes keyword from search
-            } else {
-                this.products = {};
-            }
         },
         deleteProduct(id) {
             this.$swal({

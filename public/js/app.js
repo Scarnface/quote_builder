@@ -22908,8 +22908,8 @@ __webpack_require__.r(__webpack_exports__);
       // The live search keyword
       keyword: null,
       // Pagination data
-      page: 1,
       pagination: {
+        page: 1,
         total_items: 0,
         items_per_page: 0
       }
@@ -22922,16 +22922,21 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     // Triggers search whenever users add characters to the keyword
     keyword: function keyword(after, before) {
-      this.liveSearch();
+      this.pagination.page = 1;
+      this.getResults();
     }
   },
   methods: {
     getResults: function getResults() {
       var _this = this;
 
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.page;
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.pagination.page;
       this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-        _this.$axios.get('/api/products/?page=' + page).then(function (response) {
+        _this.$axios.get('/api/products/?page=' + page, {
+          params: {
+            keyword: _this.keyword
+          }
+        }).then(function (response) {
           _this.products = response.data.data;
           _this.pagination.total_items = response.data.pagination.total;
           _this.pagination.items_per_page = response.data.pagination.per_page;
@@ -22940,32 +22945,8 @@ __webpack_require__.r(__webpack_exports__);
         });
       });
     },
-    // Searches for products by keyword
-    liveSearch: function liveSearch() {
-      var _this2 = this;
-
-      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.page;
-
-      if (this.keyword !== '') {
-        this.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-          _this2.$axios.get('/api/products/?page=' + page, {
-            params: {
-              keyword: _this2.keyword
-            }
-          }).then(function (response) {
-            _this2.products = response.data.data;
-            _this2.pagination.total_items = response.data.pagination.total;
-            _this2.pagination.items_per_page = response.data.pagination.per_page;
-          })["catch"](function (error) {
-            console.error(error);
-          });
-        }); // Removes search table by resetting variable if user deletes keyword from search
-      } else {
-        this.products = {};
-      }
-    },
     deleteProduct: function deleteProduct(id) {
-      var _this3 = this;
+      var _this2 = this;
 
       this.$swal({
         title: 'Are you sure?',
@@ -22976,15 +22957,15 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.isConfirmed) {
-          _this3.$axios.get('/sanctum/csrf-cookie').then(function (response) {
-            _this3.$axios["delete"]("/api/products/delete/".concat(id)).then(function (response) {
-              var i = _this3.products.map(function (item) {
+          _this2.$axios.get('/sanctum/csrf-cookie').then(function (response) {
+            _this2.$axios["delete"]("/api/products/delete/".concat(id)).then(function (response) {
+              var i = _this2.products.map(function (item) {
                 return item.id;
               }).indexOf(id);
 
-              _this3.products.splice(i, 1);
+              _this2.products.splice(i, 1);
 
-              _this3.$swal({
+              _this2.$swal({
                 toast: true,
                 position: 'bottom-end',
                 icon: 'success',
@@ -24163,9 +24144,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }), 256
   /* UNKEYED_FRAGMENT */
   ))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_pagination, {
-    modelValue: $data.page,
+    modelValue: $data.pagination.page,
     "onUpdate:modelValue": _cache[2] || (_cache[2] = function ($event) {
-      return $data.page = $event;
+      return $data.pagination.page = $event;
     }),
     records: this.pagination.total_items,
     "per-page": this.pagination.items_per_page,
