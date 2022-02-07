@@ -23460,14 +23460,6 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     if (window.Laravel.user) {
       this.name = window.Laravel.user.name;
-      this.$swal({
-        toast: true,
-        position: 'bottom-end',
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 3000,
-        title: 'Logged In'
-      });
     }
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {

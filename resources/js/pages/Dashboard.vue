@@ -15,14 +15,6 @@ export default {
     created() {
         if (window.Laravel.user) {
             this.name = window.Laravel.user.name
-            this.$swal({
-                toast: true,
-                position: 'bottom-end',
-                icon: 'success',
-                showConfirmButton: false,
-                timer: 3000,
-                title: 'Logged In',
-            });
         }
     },
     beforeRouteEnter(to, from, next) {
