@@ -23142,7 +23142,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         this.$swal({
           toast: true,
           position: 'bottom-end',
-          icon: 'warning',
+          icon: 'error',
           showConfirmButton: false,
           timer: 3000,
           title: 'Product already added'
