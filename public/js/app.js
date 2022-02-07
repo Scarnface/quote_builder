@@ -22922,6 +22922,7 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     // Triggers search whenever users add characters to the keyword
     keyword: function keyword(after, before) {
+      // Reset first page before search to prevent being on a non-existent page when results update
       this.pagination.page = 1;
       this.getResults();
     }

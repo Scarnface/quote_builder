@@ -11362,3 +11362,12 @@ a:hover {
   content: "£";
   font-weight: bold;
 }
+
+.page-link {
+  color: #056086;
+}
+
+.page-item.active .page-link {
+  background-color: #056086;
+  border-color: #056086;
+}

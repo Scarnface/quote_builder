@@ -81,13 +81,24 @@ a {
 .input-symbol {
     position: relative;
 }
+
 .input-symbol input {
     padding-left:25px;
 }
+
 .input-symbol:after {
     position: absolute;
     top: 21px;
     left: 10px;
     content:"£";
     font-weight: bold;
+}
+
+.page-link {
+    color: #056086;
+}
+
+.page-item.active .page-link {
+    background-color: #056086;
+    border-color: #056086;
 }
